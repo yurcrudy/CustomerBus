@@ -4,7 +4,15 @@ def AAVersion='3.3.2'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
+    signingConfigs{
+        release{
+            storeFile file("debug.keystore")
+            storePassword "123456"
+            keyAlias "123"
+            keyPassword "13726223776"
+        }
 
+    }
     defaultConfig {
         applicationId "com.yurc.customerbus"
         minSdkVersion 8
@@ -16,6 +24,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     sourceSets {
@@ -35,11 +44,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     apt "org.androidannotations:androidannotations:$AAVersion"
-    compile files('libs/AMap_2DMap_V2.8.0_20151231.jar')
-    compile files('libs/AMap_Location_V2.2.0_20151222.jar')
-    compile files('libs/AMap_Search_V2.8.0_20160105.jar')
-    compile files('libs/android-support-v4.jar')
-    compile files('libs/Volley.jar')
 }
 apt {
     arguments {
