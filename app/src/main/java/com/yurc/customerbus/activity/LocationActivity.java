@@ -1,10 +1,10 @@
 package com.yurc.customerbus.activity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.UiThread;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,19 +19,16 @@ import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.yurc.customerbus.R;
+import com.yurc.customerbus.application.BusApplication;
 import com.yurc.customerbus.util.LogUtil;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
 
 /**
  * Date：1/14/2016
  * Author：yurc
  * Describe：用户位置
  */
+
 public class LocationActivity extends BaseActivity
         implements LocationSource,AMapLocationListener {
 
@@ -48,18 +45,25 @@ public class LocationActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
         mapView = (MapView)findViewById(R.id.mv_location);
+        btn_test = (Button)findViewById(R.id.btn_test);
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LocationActivity.this,CityListActivity.class));
+            }
+        });
         mapView.onCreate(savedInstanceState);
         init();
     }
 
     void init(){
         LogUtil.v("init");
+        LogUtil.v(BusApplication.sHA1(this));
         if(aMap == null){
             aMap = mapView.getMap();
             initLocation();
         }
     }
-
     /**
      * 初始化定位层
      * */
@@ -124,7 +128,8 @@ public class LocationActivity extends BaseActivity
     public void activate(OnLocationChangedListener onLocationChangedListener) {
         mListener = onLocationChangedListener;
         if (mlocationClient == null) {
-            mlocationClient = new AMapLocationClient(this);
+            AMapLocationClient.setApiKey("0528a96d756d0006f3ca579cc5ce1ea6");
+            mlocationClient = new AMapLocationClient(getApplicationContext());
             mLocationOption = new AMapLocationClientOption();
             //设置定位监听
             mlocationClient.setLocationListener(this);

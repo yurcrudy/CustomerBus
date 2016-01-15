@@ -14,7 +14,7 @@ public class LogUtil {
 
     public static boolean isDebug = true;
 
-    private static final String TAG = "yurc";
+    private static final String TAG = "jonas";
 
     public static void i(String msg){
         if(isDebug){

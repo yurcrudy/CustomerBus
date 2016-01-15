@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin:'android-apt'
 def AAVersion='3.3.2'
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
     signingConfigs{
         release{
             storeFile file("debug.keystore")
@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId "com.yurc.customerbus"
         minSdkVersion 8
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -41,7 +41,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:appcompat-v7:22.1.1'
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     apt "org.androidannotations:androidannotations:$AAVersion"
 }
