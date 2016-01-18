@@ -18,6 +18,7 @@ import java.util.Locale;
  * Describe：Application Class
  */
 public class BusApplication extends Application{
+    public static  final String CHARSET = "UTF-8";
     @Override
     public void onCreate() {
         super.onCreate();
