@@ -1,41 +1,26 @@
 package com.yurc.customerbus.activity;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioGroup;
-
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-
-import com.amap.api.maps2d.AMap;
-import com.amap.api.maps2d.LocationSource;
-import com.amap.api.maps2d.MapView;
-import com.amap.api.maps2d.model.BitmapDescriptorFactory;
-import com.amap.api.maps2d.model.MyLocationStyle;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.LocationSource;
+import com.amap.api.maps.MapView;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.application.BusApplication;
-import com.yurc.customerbus.util.AMap2DUtil;
 import com.yurc.customerbus.util.AMap3DUtil;
 import com.yurc.customerbus.util.LogUtil;
 
-
 /**
- * Date：1/14/2016
- * Author：yurc
- * Describe：用户位置
+ * Created by yrc on 2016/1/21.
  */
-
-public class LocationActivity extends BaseActivity
-        implements LocationSource,AMapLocationListener {
-
+public class LocationMapsActivity extends BaseActivity  implements LocationSource,AMapLocationListener {
     private Button btn_test;
     private final double lt= 22.371533;
     private final double pt= 113.573098;
@@ -49,14 +34,13 @@ public class LocationActivity extends BaseActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location);
+        setContentView(R.layout.activity_location_maps);
         mapView = (MapView)findViewById(R.id.mv_location);
         btn_test = (Button)findViewById(R.id.btn_test);
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LocationActivity.this,LocationMapsActivity.class);
-                startActivity(intent);
+
             }
         });
         mapView.onCreate(savedInstanceState);
@@ -67,7 +51,7 @@ public class LocationActivity extends BaseActivity
         LogUtil.v("init");
         LogUtil.v(BusApplication.sHA1(this));
         if(aMap == null){
-            aMap = AMap2DUtil.initAMap(mapView, 22.371533, 113.573098);
+            aMap = AMap3DUtil.initAMap(mapView);
             initLocation();
         }
 //        mGPSModeGroup = (RadioGroup) findViewById(R.id.gps_radio_group);
@@ -166,5 +150,4 @@ public class LocationActivity extends BaseActivity
         }
         mlocationClient = null;
     }
-
 }
