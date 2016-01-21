@@ -1,18 +1,20 @@
 package com.yurc.customerbus.activity;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
+
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.LocationSource;
 import com.amap.api.maps2d.MapView;
@@ -20,6 +22,8 @@ import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.application.BusApplication;
+import com.yurc.customerbus.util.AMap2DUtil;
+import com.yurc.customerbus.util.AMap3DUtil;
 import com.yurc.customerbus.util.LogUtil;
 
 
@@ -33,12 +37,14 @@ public class LocationActivity extends BaseActivity
         implements LocationSource,AMapLocationListener {
 
     private Button btn_test;
-
+    private final double lt= 22.371533;
+    private final double pt= 113.573098;
     private MapView mapView;
     private AMap aMap;
-    private OnLocationChangedListener mListener;
+    private LocationSource.OnLocationChangedListener mListener;
     private AMapLocationClient mlocationClient;
     private AMapLocationClientOption mLocationOption;
+//    private RadioGroup mGPSModeGroup;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +55,7 @@ public class LocationActivity extends BaseActivity
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LocationActivity.this,CityListActivity.class));
+
             }
         });
         mapView.onCreate(savedInstanceState);
@@ -60,24 +66,31 @@ public class LocationActivity extends BaseActivity
         LogUtil.v("init");
         LogUtil.v(BusApplication.sHA1(this));
         if(aMap == null){
-            aMap = mapView.getMap();
+            aMap = AMap2DUtil.initAMap(mapView,22.371533,113.573098);
             initLocation();
         }
+//        mGPSModeGroup = (RadioGroup) findViewById(R.id.gps_radio_group);
+//        mGPSModeGroup.setOnCheckedChangeListener(this);
+//        mLocationErrText = (TextView)findViewById(R.id.location_errInfo_text);
+//        mLocationErrText.setVisibility(View.GONE);
     }
     /**
      * 初始化定位层
      * */
     void initLocation(){
         MyLocationStyle myLocationStyle = new MyLocationStyle();
-        myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));//设置定位图标
-        myLocationStyle.strokeColor(Color.BLACK);//设置圆形的边框颜色
-        myLocationStyle.strokeWidth(1.0f);//设置边框粗细
+        myLocationStyle.myLocationIcon(BitmapDescriptorFactory
+                .fromResource(R.mipmap.location_marker));// 设置小蓝点的图标
+        myLocationStyle.strokeColor(Color.BLACK);// 设置圆形的边框颜色
         myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));// 设置圆形的填充颜色
         // myLocationStyle.anchor(int,int)//设置小蓝点的锚点
+        myLocationStyle.strokeWidth(1.0f);// 设置圆形的边框粗细
         aMap.setMyLocationStyle(myLocationStyle);
         aMap.setLocationSource(this);
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);
-        aMap.setMyLocationEnabled(true);
+        aMap.getUiSettings().setMyLocationButtonEnabled(true);//设置定位按钮
+
+        aMap.setMyLocationEnabled(true);//设置true会触发定位
+//        aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE); 3D地图专用
     }
 
 
@@ -97,12 +110,16 @@ public class LocationActivity extends BaseActivity
     protected void onPause() {
         super.onPause();
         mapView.onPause();
+        deactivate();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+        if(null != mlocationClient){
+            mlocationClient.onDestroy();
+        }
     }
 
     /**
@@ -117,6 +134,7 @@ public class LocationActivity extends BaseActivity
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode()+ ": " + amapLocation.getErrorInfo();
                 Log.e("AmapErr", errText);
+                mlocationClient.stopLocation();
             }
         }
     }
@@ -128,7 +146,6 @@ public class LocationActivity extends BaseActivity
     public void activate(OnLocationChangedListener onLocationChangedListener) {
         mListener = onLocationChangedListener;
         if (mlocationClient == null) {
-            AMapLocationClient.setApiKey("0528a96d756d0006f3ca579cc5ce1ea6");
             mlocationClient = new AMapLocationClient(getApplicationContext());
             mLocationOption = new AMapLocationClientOption();
             //设置定位监听
@@ -157,4 +174,5 @@ public class LocationActivity extends BaseActivity
         }
         mlocationClient = null;
     }
+
 }
