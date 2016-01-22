@@ -19,9 +19,11 @@ import java.util.Locale;
  */
 public class BusApplication extends Application{
     public static  final String CHARSET = "UTF-8";
+    private static Context context;
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         LogUtil.v("application init!");
         LogUtil.v(BusApplication.sHA1(getApplicationContext()));
     }
@@ -50,5 +52,9 @@ public class BusApplication extends Application{
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static Context getContext() {
+        return context;
     }
 }

@@ -1,13 +1,11 @@
 package com.yurc.customerbus.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioGroup;
 
 
 import com.amap.api.location.AMapLocation;
@@ -18,12 +16,9 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.LocationSource;
 import com.amap.api.maps2d.MapView;
-import com.amap.api.maps2d.model.BitmapDescriptorFactory;
-import com.amap.api.maps2d.model.MyLocationStyle;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.application.BusApplication;
 import com.yurc.customerbus.util.AMap2DUtil;
-import com.yurc.customerbus.util.AMap3DUtil;
 import com.yurc.customerbus.util.LogUtil;
 
 
