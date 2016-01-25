@@ -47,7 +47,6 @@ public class LocationMapsUtil implements LocationSource,LocationImpl {
      * */
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
-        LogUtil.v("LocationMapsUtil >>>>>> activate");
         mListener = onLocationChangedListener;
         initHandler();
         locationHandler.sendEmptyMessage(LocationHandler.START_FLAG);//启动定位
@@ -55,13 +54,10 @@ public class LocationMapsUtil implements LocationSource,LocationImpl {
 
     @Override
     public void deactivate() {
-        LogUtil.v("LocationMapsUtil >>>>>> deactivate");
         mListener = null;
-        onDestroy();
     }
 
     public void onDestroy(){
-        LogUtil.v("LocationMapsUtil >>>>>> onDestroy");
         locationHandler.sendEmptyMessage(LocationHandler.DESTROY_FLAG);
         locationHandler = null;
     }
@@ -71,19 +67,17 @@ public class LocationMapsUtil implements LocationSource,LocationImpl {
      * */
     @Override
     public void startLocation(){
-        LogUtil.v("LocationMapsUtil >>>>>> startLocation");
+
     }
     //停止
     @Override
     public void stopLocation() {
-        LogUtil.v("LocationMapsUtil >>>>>> stopLocation");
+
     }
     //完成定位
     @Override
     public void finishLocation(AMapLocation amapLocation) {
-            LogUtil.v("LocationMapsUtil  >>>>>> onLocationChanged");
                 if (amapLocation != null) {
-                    LogUtil.v("LocationClient >>>>>>> " + amapLocation.getErrorCode());
                     if (amapLocation.getErrorCode() == 0) {
                         //定位成功回调信息，设置相关消息
                         amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表

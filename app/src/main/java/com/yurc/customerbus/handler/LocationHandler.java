@@ -12,7 +12,7 @@ import com.yurc.customerbus.util.LocationClient;
 /**
  * Date：1/25/2016
  * Author：yurc
- * Describe：启动别的线程执行
+ * Describe：定位控制
  */
 public class LocationHandler extends Handler {
 

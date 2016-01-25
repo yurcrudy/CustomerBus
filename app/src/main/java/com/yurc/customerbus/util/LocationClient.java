@@ -25,6 +25,7 @@ public class LocationClient implements AMapLocationListener {
     public AMapLocationClientOption mLocationOption = null;
 
     private LocationHandler locationHandler;
+    AMapLocationClientOption.AMapLocationMode MODE = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy;
 
     public LocationClient(Context context,LocationHandler locationHandler){
         aMapLocationClient = new AMapLocationClient(context);

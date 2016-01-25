@@ -45,25 +45,28 @@ public class TestActivity extends BaseActivity implements LocationImpl{
 
     @Click(R.id.btn_stop)
     void click(){
-        locationHandler.sendEmptyMessage(LocationHandler.STOP_FLAG);
+        locationHandler.sendEmptyMessage(LocationHandler.START_FLAG);
     }
 
     //开始定位
     @Override
     public void startLocation() {
         ToastUitl.ToastForShort(TestActivity.this, "startLocation");
+        showDialog("正在定位");
     }
 
     //停止
     @Override
     public void stopLocation() {
         ToastUitl.ToastForShort(TestActivity.this, "stopLocation");
+        dismissDialog();
     }
 
     //完成
     @Override
     public void finishLocation(AMapLocation amapLocation) {
         ToastUitl.ToastForShort(TestActivity.this, "successLocation");
+        dismissDialog();
     }
 
 }

@@ -2,6 +2,7 @@ package com.yurc.customerbus.util;
 
 
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
@@ -18,7 +19,7 @@ public class AMapMapsUtil {
 
     private static AMap aMap = null;
     private static LatLng latLng = null;//位置点
-    private static float zoom = 15.0f;//默认地图显示级别
+    private static float zoom = 16.0f;//默认地图显示级别
     private static double longitude = 0;//默认地图中心的经度
     private static double position = 0;//默认地图中心的纬度
     private static MyLocationStyle myLocationStyle;//位置点
@@ -29,6 +30,7 @@ public class AMapMapsUtil {
     }
 
     public static AMap initAMap(MapView mapView){
+
         aMap = (mapView == null)? null:mapView.getMap();
         if(aMap == null){
             return aMap;
@@ -36,10 +38,12 @@ public class AMapMapsUtil {
         if(latLng == null){
             latLng = new LatLng(longitude,position);
         }
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
         if(myLocationStyle == null){
             myLocationStyle = new MyLocationStyle();
             myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.mipmap.location_marker));// 设置小蓝点的图标
         }
+        aMap.setMyLocationStyle(myLocationStyle);
         return  aMap;
     }
 
