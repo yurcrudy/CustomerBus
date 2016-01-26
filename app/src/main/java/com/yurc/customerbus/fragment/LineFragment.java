@@ -24,11 +24,7 @@ public class LineFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(view == null){
-            view = inflater.inflate(R.layout.fragment_line,container);
-        }
-        ViewGroup viewGroup = (ViewGroup) view.getParent();
-        if(viewGroup != null){
-            viewGroup.removeView(view);
+            view = inflater.inflate(R.layout.fragment_line,container,false);//必须为false
         }
         return view;
     }

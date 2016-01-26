@@ -20,11 +20,7 @@ public class StationFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(view == null){
-            view = inflater.inflate(R.layout.fragment_station,container);
-        }
-        ViewGroup viewGroup = (ViewGroup)view.getParent();
-        if(viewGroup != null){
-            viewGroup.removeView(view);
+            view = inflater.inflate(R.layout.fragment_station,container,false);//必须为false
         }
         return view;
     }

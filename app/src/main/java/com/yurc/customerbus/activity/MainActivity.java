@@ -39,10 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
     private View.OnClickListener onClickListener = null;
 
+    private Fragment mContent = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_main);
         //实例化所有的fragment
         if(savedInstanceState == null){
             startEndFragment = (StartEndFragment) Fragment.instantiate(this, StartEndFragment.class.getName());
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
             mineFragment = (MineFragment) getSupportFragmentManager().getFragment(savedInstanceState, MineFragment.class.getName());
         }
-        setContentView(R.layout.activity_main);
+
         initViews();
 
     }
@@ -93,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         mStationImageView.setOnClickListener(onClickListener);
         mMineImageView.setOnClickListener(onClickListener);
 
-//        chooseTab(START_END_TAB);
+        chooseTab(START_END_TAB);
     }
     /**
      * 底栏点击事件
@@ -140,33 +142,54 @@ public class MainActivity extends AppCompatActivity {
      * 切换页面
      * */
     public void chooseTab(Fragment fragment){
-        LogUtil.v("chooseTab Fragment");
-        if(!fragment.isAdded()){
-            LogUtil.v("chooseTab isAdded");
-            //得到Fragment事务管理器
+//        LogUtil.v("chooseTab Fragment");
+//        if(!fragment.isAdded()){
+//            LogUtil.v("chooseTab isAdded");
+//            //得到Fragment事务管理器
+//            FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
+//            LogUtil.v("chooseTab fragmentTransaction");
+//            //替换当前的页面
+//            fragmentTransaction.replace(R.id.frame_content, fragment);
+//            //事务管理提交
+//            LogUtil.v("chooseTab replace");
+//            fragmentTransaction.commit();
+//            LogUtil.v("chooseTab commit");
+//        }
+        if(mContent == null){
+            LogUtil.v("mContent == null");
             FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
-            LogUtil.v("chooseTab fragmentTransaction");
-            //替换当前的页面
-            fragmentTransaction.add(R.id.frame_content, fragment);
-            //事务管理提交
-            LogUtil.v("chooseTab replace");
+            fragmentTransaction.add(R.id.frame_content,fragment);
             fragmentTransaction.commit();
-            LogUtil.v("chooseTab commit");
+            mContent = fragment;
+        }else{
+            if(mContent != fragment){
+                FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
+                if(!fragment.isAdded()){
+                    LogUtil.v("!fragment.isAdded()");
+                    fragmentTransaction.hide(mContent).add(R.id.frame_content, fragment).commit();
+                }else{
+                    LogUtil.v("fragment.isAdded()");
+                    fragmentTransaction.hide(mContent).show(fragment).commit();
+                }
+                mContent = fragment;
+            }else{
+                LogUtil.v("mContent == fragment");
+            }
         }
     }
 
     public void clearAllChoose(){
         LogUtil.v("clearAllChoose");
-        mStartEndFrameLayout.setSelected(false);
+        mStartEndImageView.setEnabled(true);
         mStartEndImageView.setSelected(false);
 
-        mLineFrameLayout.setSelected(false);
+        mLineImageView.setEnabled(true);
         mLineImageView.setSelected(false);
 
-        mStationFrameLayout.setSelected(false);
+        mStationImageView.setEnabled(true);
         mStationImageView.setSelected(false);
 
-        mMineFrameLayout.setSelected(false);
+        mMineImageView.setEnabled(true);
         mMineImageView.setSelected(false);
     }
 
@@ -175,35 +198,35 @@ public class MainActivity extends AppCompatActivity {
         clearAllChoose();
         switch (type) {
             case START_END_TAB://起点终点
-                mStartEndFrameLayout.setSelected(true);
+                mStartEndImageView.setEnabled(false);
                 mStartEndImageView.setSelected(true);
                 if (startEndFragment == null)
-                    startEndFragment = new StartEndFragment();
-//                    startEndFragment = (StartEndFragment)Fragment.instantiate(MainActivity.this,StartEndFragment.class.getName());
+//                    startEndFragment = new StartEndFragment();
+                    startEndFragment = (StartEndFragment)Fragment.instantiate(MainActivity.this,StartEndFragment.class.getName());
                 chooseTab(startEndFragment);
                 break;
             case LINE_TAB://线路搜索
-                mLineFrameLayout.setSelected(true);
+                mLineImageView.setEnabled(false);
                 mLineImageView.setSelected(true);
                 if (lineFragment == null)
-                    lineFragment = new LineFragment();
-//                    lineFragment = (LineFragment)Fragment.instantiate(MainActivity.this,LineFragment.class.getName());
+//                    lineFragment = new LineFragment();
+                    lineFragment = (LineFragment)Fragment.instantiate(MainActivity.this,LineFragment.class.getName());
                 chooseTab(lineFragment);
                 break;
             case STATION_TAB://站点搜索
-                mStationFrameLayout.setSelected(true);
+                mStationImageView.setEnabled(false);
                 mStationImageView.setSelected(true);
                 if (stationFragment == null)
-                    stationFragment = new StationFragment();
-//                    stationFragment = (StationFragment)Fragment.instantiate(MainActivity.this,StationFragment.class.getName());
+//                    stationFragment = new StationFragment();
+                    stationFragment = (StationFragment)Fragment.instantiate(MainActivity.this,StationFragment.class.getName());
                 chooseTab(stationFragment);
                 break;
             case MINE_TAB://我的
-                mMineFrameLayout.setSelected(true);
+                mMineImageView.setEnabled(false);
                 mMineImageView.setSelected(true);
                 if (mineFragment == null)
-                    mineFragment = new MineFragment();
-//                    mineFragment = (MineFragment)Fragment.instantiate(MainActivity.this,MineFragment.class.getName());
+//                    mineFragment = new MineFragment();
+                    mineFragment = (MineFragment)Fragment.instantiate(MainActivity.this,MineFragment.class.getName());
                 chooseTab(mineFragment);
                 break;
         }
