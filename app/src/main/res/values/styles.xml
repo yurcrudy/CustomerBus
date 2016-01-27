@@ -6,7 +6,38 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
     </style>
 
     <style name="FullTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="aspect_both_wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="aspect_both_match">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="aspect_wrap_match">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="aspect_match_wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- 默认action bar 样式-->
+    <style name="actionbar_title" parent="aspect_both_wrap">
+        <item name="android:textSize">@dimen/font_l</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:maxLength">10</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">none</item>
+    </style>
+
 </resources>

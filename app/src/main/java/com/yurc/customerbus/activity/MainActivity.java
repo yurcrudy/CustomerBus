@@ -3,6 +3,7 @@ package com.yurc.customerbus.activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +17,7 @@ import com.yurc.customerbus.fragment.StartEndFragment;
 import com.yurc.customerbus.fragment.StationFragment;
 import com.yurc.customerbus.util.LogUtil;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private final static int START_END_TAB = 1;
     private final static int LINE_TAB = 2;
@@ -66,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             mineFragment = (MineFragment) getSupportFragmentManager().getFragment(savedInstanceState, MineFragment.class.getName());
         }
-
         initViews();
 
     }
@@ -142,19 +142,6 @@ public class MainActivity extends AppCompatActivity {
      * 切换页面
      * */
     public void chooseTab(Fragment fragment){
-//        LogUtil.v("chooseTab Fragment");
-//        if(!fragment.isAdded()){
-//            LogUtil.v("chooseTab isAdded");
-//            //得到Fragment事务管理器
-//            FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
-//            LogUtil.v("chooseTab fragmentTransaction");
-//            //替换当前的页面
-//            fragmentTransaction.replace(R.id.frame_content, fragment);
-//            //事务管理提交
-//            LogUtil.v("chooseTab replace");
-//            fragmentTransaction.commit();
-//            LogUtil.v("chooseTab commit");
-//        }
         if(mContent == null){
             LogUtil.v("mContent == null");
             FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();

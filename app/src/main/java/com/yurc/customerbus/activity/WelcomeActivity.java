@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -19,7 +20,7 @@ import com.yurc.customerbus.R;
  * Author：yurc
  * Describe：
  */
-public class WelcomeActivity extends BaseActivity implements Animation.AnimationListener{
+public class WelcomeActivity extends AppCompatActivity implements Animation.AnimationListener{
 
     public static final int REQUESTCODE = 1;
 
