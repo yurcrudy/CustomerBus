@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/content_background"
+    android:orientation="vertical"
     tools:context=".MainActivity">
+        <include layout="@layout/actionbar_default" />
+        <FrameLayout
+            android:id="@+id/frame_content"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
         <LinearLayout
             android:id="@+id/ll_tab"
-            android:layout_alignParentLeft="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:background="@mipmap/bottom_bg">
             <!-- 线路 -->
             <FrameLayout
@@ -77,16 +83,6 @@
                     android:layout_gravity="top|center"
                     android:layout_marginTop="1.0dip"
                     android:src="@drawable/tab_bottom_mine" />
-
             </FrameLayout>
-
         </LinearLayout>
-        <FrameLayout
-            android:id="@+id/frame_content"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_above="@id/ll_tab"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" />
-</RelativeLayout>
+</LinearLayout>

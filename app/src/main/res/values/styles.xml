@@ -1,16 +1,19 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="contentInsetStart">0dp</item>
-        <item name="contentInsetEnd">0dp</item>
-    </style>
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <!--<item name="contentInsetStart">0dp</item>-->
+        <!--<item name="contentInsetEnd">0dp</item>-->
+        <!--<item name="android:padding">0dp</item>-->
 
+    <!--</style>-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
     <style name="FullTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
     <style name="aspect_both_wrap">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -33,9 +36,9 @@
 
     <!-- 默认action bar 样式-->
     <style name="actionbar_title" parent="aspect_both_wrap">
-        <item name="android:textSize">@dimen/font_l</item>
+        <item name="android:textSize">@dimen/font_xl</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:maxLength">10</item>
+        <item name="android:maxLength">15</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">none</item>
     </style>

@@ -68,6 +68,7 @@ public class MainActivity extends BaseActivity {
             mineFragment = (MineFragment) getSupportFragmentManager().getFragment(savedInstanceState, MineFragment.class.getName());
         }
         initViews();
+        initActionBar();
 
     }
     /**

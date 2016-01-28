@@ -29,8 +29,7 @@
         <!--  高德地图 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="73644876d7793691348d72648d69368a" />
-
+            android:value="0528a96d756d0006f3ca579cc5ce1ea6" />
 
         <activity
             android:name=".activity.WelcomeActivity"

@@ -152,4 +152,6 @@
     <color name="black">#000000</color><!--黑色 -->
 
     <color name="transparent">#00000000</color>
+    <!-- 页面默认背景 -->
+    <color name="content_background">#F0F0F0</color>
 </resources>
