@@ -34,7 +34,16 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <!-- 默认action bar 样式-->
+    <!-- 默认 action bar 样式-->
+    <style name="actionbar_default">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:padding">@dimen/default_padding</item>
+    </style>
+
+    <!-- 默认 action bar title样式-->
     <style name="actionbar_title" parent="aspect_both_wrap">
         <item name="android:textSize">@dimen/font_xl</item>
         <item name="android:textColor">@color/white</item>
