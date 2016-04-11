@@ -6,7 +6,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import com.yurc.customerbus.util.LogUtil;
-import com.yurc.customerbus.util.ToastUitl;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

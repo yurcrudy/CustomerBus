@@ -154,4 +154,21 @@
     <color name="transparent">#00000000</color>
     <!-- 页面默认背景 -->
     <color name="content_background">#F0F0F0</color>
+
+    <!-- APP 主题色-->
+    <color name="theme_color">#1EBDA7</color>
+
+    <!-- home activity grid title color-->
+    <color name="home_grid_title">#6C6C6C</color>
+    <!-- home activity grid interval color-->
+    <color name="home_interval">#EFEFEF</color>
+
+    <color name="surround_bus_background">#E6E6E6</color>
+
+    <color name="surround_bus_list_text">#555555</color>
+
+    <color name="bus_line_detail_text">#A1A1A1</color>
+    <color name="bus_line_detail_interval">#E5E5E5</color>
+
+
 </resources>

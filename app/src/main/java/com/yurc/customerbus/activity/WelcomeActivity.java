@@ -37,7 +37,7 @@ public class WelcomeActivity extends AppCompatActivity implements Animation.Anim
             }else{
 
             }
-            Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
+            Intent intent = new Intent(WelcomeActivity.this,HomeActivity.class);
             startActivity(intent);
             finish();
             return false;

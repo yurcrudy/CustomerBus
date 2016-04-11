@@ -1,16 +1,11 @@
 package com.yurc.customerbus.activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.TextView;
 
 import com.yurc.customerbus.R;
-import com.yurc.customerbus.util.StringUtil;
-import com.yurc.customerbus.util.ToastUitl;
 import com.yurc.customerbus.view.LoadingDialog;
 
 /**

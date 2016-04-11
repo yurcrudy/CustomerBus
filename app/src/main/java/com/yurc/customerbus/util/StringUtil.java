@@ -20,4 +20,22 @@ public class StringUtil {
         return (str == null || str.length() == 0);
     }
 
+    /**
+     * int to the String "08:08" | "10:10"
+     * */
+    public static String IntToTimeStr(int hour,int minute){
+        String timeStr = "";
+        if(hour >= 10){
+            timeStr += hour;
+        }else{
+            timeStr += "0" + hour;
+        }
+        timeStr += ":";
+        if(minute >= 10){
+            timeStr += minute;
+        }else{
+            timeStr += "0" + minute;
+        }
+        return timeStr;
+    }
 }

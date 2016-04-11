@@ -2,4 +2,28 @@
     <string name="app_name">CustomerBus</string>
 
     <string name="loading">正在加载数据...</string>
+    <string name="home_title">首 页</string>
+    <string name="home_surround">周 边 公 交</string>
+    <string name="home_line">线 路 查 询</string>
+    <string name="home_site">站 点 查 询</string>
+    <string name="home_transfer">换 乘 查 询</string>
+
+    <string name="surround_bus_title">周边公交</string>
+
+    <string name="bus_line_detail_title">线路详情</string>
+    <string name="bus_line_detail_hint">线路信息</string>
+    <string name="bus_line_detail_all_station">途经站点</string>
+    <string name="bus_line_detail_map">查看地图</string>
+
+    <string name="bus_line_detail_number_hint">线路编号</string>
+    <string name="bus_line_detail_prace_hint">全程票价</string>
+    <string name="bus_line_detail_time_hint">运营时间</string>
+
+    <string name="error_network">搜索失败,请检查网络连接！</string>
+    <string name="error_key">key验证无效！</string>
+    <string name="error_other">未知错误，请稍后重试!错误码为</string>
+    <string name="no_result">对不起，没有搜索到相关数据！</string>
+
+    <string name="busline_query_title">线路查询</string>
+    <string name="busline_query_et_hint">请输入线路名称</string>
 </resources>

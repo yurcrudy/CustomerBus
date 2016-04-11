@@ -8,7 +8,7 @@ import android.widget.Toast;
  * Author：yurc
  * Describe：Toast Common Util
  */
-public class ToastUitl {
+public class ToastUtil {
 
     public static void ToastForShort(Context context,String str){
         Toast.makeText(context,str,Toast.LENGTH_SHORT).show();
@@ -16,6 +16,10 @@ public class ToastUitl {
 
     public static void ToastForLong(Context context,String str){
         Toast.makeText(context,str,Toast.LENGTH_LONG).show();
+    }
+
+    public static void ToastForLong(Context context, int info) {
+        Toast.makeText(context, info, Toast.LENGTH_LONG).show();
     }
 
 }
