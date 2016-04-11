@@ -44,7 +44,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.rl_line_bus:
-                intent = new Intent(HomeActivity.this,BuslineActivity.class);
+                intent = new Intent(HomeActivity.this,BusLineQueryActivity.class);
                 startActivity(intent);
                 break;
 

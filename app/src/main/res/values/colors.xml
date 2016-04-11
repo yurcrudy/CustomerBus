@@ -169,6 +169,6 @@
 
     <color name="bus_line_detail_text">#A1A1A1</color>
     <color name="bus_line_detail_interval">#E5E5E5</color>
-
+    <color name="bus_line_query_direction">#949494</color>
 
 </resources>
