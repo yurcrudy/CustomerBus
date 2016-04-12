@@ -9,7 +9,6 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/default_padding"
         android:src="@mipmap/bus_gray"/>
     <LinearLayout
         android:layout_width="0dp"
@@ -17,11 +16,10 @@
         android:layout_weight="1"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/tv_start_end_station"
+            android:id="@+id/tv_first_last_station"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:paddingLeft="@dimen/default_padding"
-            android:text="@string/busline_query_del_hint"
             android:textSize="@dimen/font_l"
             android:textColor="@color/black"/>
         <TextView
@@ -29,12 +27,11 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:paddingLeft="@dimen/default_padding"
-            android:paddingTop="@dimen/default_padding"
-            android:text="@string/busline_query_del_hint"
+            android:paddingTop="@dimen/five_padding"
             android:textColor="@color/bus_line_query_direction"/>
     </LinearLayout>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/arrow"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/arrow"/>
 </LinearLayout>

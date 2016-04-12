@@ -1,5 +1,7 @@
 package com.yurc.customerbus.model;
 
+import com.amap.api.services.busline.BusStationItem;
+
 /**
  * Date：4/12/2016
  * Author：yurc
@@ -13,6 +15,14 @@ public class BusStationDetail {
 
     public BusStationDetail() {
     }
+
+    public BusStationDetail(BusStationItem busStationItem) {
+        this.stationID = busStationItem.getBusStationId();
+        this.busStationName = busStationItem.getBusStationName();
+        this.cityCode = busStationItem.getCityCode();
+        this.ADCode = busStationItem.getAdCode();
+    }
+
 
 
     public BusStationDetail(String stationID, String busStationName, String cityCode, String ADCode) {

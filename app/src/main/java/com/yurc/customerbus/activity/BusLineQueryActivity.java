@@ -13,11 +13,14 @@ import com.amap.api.services.busline.BusLineQuery;
 import com.amap.api.services.busline.BusLineResult;
 import com.amap.api.services.busline.BusLineSearch;
 import com.yurc.customerbus.R;
+import com.yurc.customerbus.adapter.BusLineQueryAdapter;
+import com.yurc.customerbus.model.BusLineDetail;
 import com.yurc.customerbus.util.DictionaryUtil;
 import com.yurc.customerbus.util.JsonUtil;
 import com.yurc.customerbus.util.SharedPerferenceUtil;
 import com.yurc.customerbus.util.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +29,8 @@ import java.util.List;
  * Describe：线路查询列表页面
  */
 public class BusLineQueryActivity extends BaseActivity implements View.OnClickListener, BusLineSearch.OnBusLineSearchListener {
-
+    private List<BusLineDetail> busLineDetailList;
+    private BusLineQueryAdapter busLineQueryAdapter;
     private ListView lv_history;
     private LinearLayout ll_del;
     private EditText et_busline_name;
@@ -48,7 +52,11 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
     }
 
     public void initViews(){
+        busLineDetailList = new ArrayList<BusLineDetail>();
+        busLineQueryAdapter = new BusLineQueryAdapter(busLineDetailList,R.layout.list_item_busline_query,BusLineQueryActivity.this);
+        //todo  加载历史数据
         lv_history = (ListView)findViewById(R.id.lv_history);
+        lv_history.setAdapter(busLineQueryAdapter);
         ll_del = (LinearLayout)findViewById(R.id.ll_del);
         ll_del.setOnClickListener(BusLineQueryActivity.this);
         et_busline_name = (EditText)findViewById(R.id.et_busline_name);
@@ -110,7 +118,6 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onBusLineSearched(BusLineResult result, int rCode) {
-        dismissDialog();
         if (rCode == 0) {
             if (result != null && result.getQuery() != null
                     && result.getQuery().equals(busLineQuery)) {
@@ -120,8 +127,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
                             && result.getBusLines().size() > 0) {
                         busLineResult = result;
                         lineItems = result.getBusLines();
-//                        showResultList(lineItems);
-                        ToastUtil.ToastForLong(BusLineQueryActivity.this, JsonUtil.toJson(lineItems.get(0).getBusStations()));
+                        showResultList(lineItems);
                     }
                 } else if (result.getQuery().getCategory() == BusLineQuery.SearchType.BY_LINE_ID) {
 //                    aMap.clear();// 清理地图上的marker
@@ -144,9 +150,24 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
         } else {
             ToastUtil.ToastForLong(BusLineQueryActivity.this, R.string.error_other);
         }
+        dismissDialog();
     }
 
-    public void showResultList(){
-
+    public void showResultList(List<BusLineItem> items){
+        if(items != null && !items.isEmpty()){
+            busLineDetailList.clear();
+            ll_del.setVisibility(View.GONE);
+            for(BusLineItem item : items){
+                busLineDetailList.add(new BusLineDetail(item));
+            }
+            busLineQueryAdapter.notifyDataSetChanged();
+        }
+    }
+    public void showResultforHistory(List<BusLineDetail> items){
+        if(items != null && !items.isEmpty()){
+            busLineDetailList.clear();
+            busLineDetailList.addAll(items);
+        }
+        busLineQueryAdapter.notifyDataSetChanged();
     }
 }

@@ -45,10 +45,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:layout_marginTop="@dimen/default_padding"
         android:paddingLeft="@dimen/default_padding"
         android:orientation="vertical">
         <ListView
-            android:layout_marginTop="@dimen/default_padding"
             android:id="@+id/lv_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/default_padding"
+
                 android:src="@mipmap/del_icon"/>
             <TextView
                 android:layout_width="0dp"

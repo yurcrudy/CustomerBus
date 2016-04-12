@@ -1,7 +1,9 @@
 package com.yurc.customerbus.model;
 
 import com.amap.api.services.busline.BusLineItem;
+import com.amap.api.services.busline.BusStationItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +30,12 @@ public class BusLineDetail {
     }
 
     public BusLineDetail(BusLineItem busLineItem) {
-
+        this.busStationDetailList = new ArrayList<BusStationDetail>();
+        if(busLineItem.getBusStations() != null && !busLineItem.getBusStations().isEmpty()){
+            for(BusStationItem busStationItem : busLineItem.getBusStations()){
+                this.busStationDetailList.add(new BusStationDetail(busStationItem));
+            }
+        }
         this.busLineName = busLineItem.getBusLineName();
         this.busType = busLineItem.getBusLineType();
         this.cityCode = busLineItem.getCityCode();
