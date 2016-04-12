@@ -89,7 +89,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
             search = "K3";
             et_busline_name.setText(search);
         }
-        cityCode = SharedPerferenceUtil.getString(BusLineQueryActivity.this, DictionaryUtil.CITY_CODE,"0769");
+        cityCode = SharedPerferenceUtil.getString(BusLineQueryActivity.this, DictionaryUtil.CITY_CODE,"440400");
 
         busLineQuery = new BusLineQuery(search, BusLineQuery.SearchType.BY_LINE_NAME,
                 cityCode);// 第一个参数表示公交线路名，第二个参数表示公交线路查询，第三个参数表示所在城市名或者城市区号
@@ -121,7 +121,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
                         busLineResult = result;
                         lineItems = result.getBusLines();
 //                        showResultList(lineItems);
-                        ToastUtil.ToastForLong(BusLineQueryActivity.this, JsonUtil.toJson(lineItems));
+                        ToastUtil.ToastForLong(BusLineQueryActivity.this, JsonUtil.toJson(lineItems.get(0).getBusStations()));
                     }
                 } else if (result.getQuery().getCategory() == BusLineQuery.SearchType.BY_LINE_ID) {
 //                    aMap.clear();// 清理地图上的marker
