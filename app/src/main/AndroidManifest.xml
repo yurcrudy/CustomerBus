@@ -81,6 +81,10 @@
             android:name=".activity.BusLineQueryActivity"
             android:label="BusLineQueryActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BusLineDetailActivity"
+            android:label="BusLineDetailActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name="com.amap.api.location.APSService" >
         </service>

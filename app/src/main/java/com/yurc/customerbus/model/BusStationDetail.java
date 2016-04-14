@@ -2,12 +2,14 @@ package com.yurc.customerbus.model;
 
 import com.amap.api.services.busline.BusStationItem;
 
+import java.io.Serializable;
+
 /**
  * Date：4/12/2016
  * Author：yurc
  * Describe：公交站点数据查询
  */
-public class BusStationDetail {
+public class BusStationDetail implements Serializable{
     private String stationID;
     private String busStationName;
     private String cityCode;

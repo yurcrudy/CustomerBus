@@ -1,7 +1,9 @@
 package com.yurc.customerbus.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,7 +30,7 @@ import java.util.List;
  * Author：yurc
  * Describe：线路查询列表页面
  */
-public class BusLineQueryActivity extends BaseActivity implements View.OnClickListener, BusLineSearch.OnBusLineSearchListener {
+public class BusLineQueryActivity extends BaseActivity implements View.OnClickListener, BusLineSearch.OnBusLineSearchListener,AdapterView.OnItemClickListener{
     private List<BusLineDetail> busLineDetailList;
     private BusLineQueryAdapter busLineQueryAdapter;
     private ListView lv_history;
@@ -42,7 +44,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
     private BusLineSearch busLineSearch;// 公交线路列表查询
     private BusLineResult busLineResult;// 公交线路搜索返回的结果
     private List<BusLineItem> lineItems = null;// 公交线路搜索返回的busline
-
+    private static final String BUSLINE_DETAIL = "BUSLINE_DETAIL";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -60,7 +62,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
         ll_del = (LinearLayout)findViewById(R.id.ll_del);
         ll_del.setOnClickListener(BusLineQueryActivity.this);
         et_busline_name = (EditText)findViewById(R.id.et_busline_name);
-
+        lv_history.setOnItemClickListener(BusLineQueryActivity.this);
         iv_back = (ImageView)findViewById(R.id.iv_back);
         iv_back.setOnClickListener(BusLineQueryActivity.this);
         iv_search = (ImageView)findViewById(R.id.iv_search);
@@ -169,5 +171,12 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
             busLineDetailList.addAll(items);
         }
         busLineQueryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(BusLineQueryActivity.this,BusLineDetailActivity.class);
+        intent.putExtra("BUSLINE_DETAIL",busLineDetailList.get(position));
+        startActivity(intent);
     }
 }

@@ -3,6 +3,7 @@ package com.yurc.customerbus.model;
 import com.amap.api.services.busline.BusLineItem;
 import com.amap.api.services.busline.BusStationItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * Author：yurc
  * Describe：公交车线路详情
  */
-public class BusLineDetail {
+public class BusLineDetail implements Serializable{
     private List<BusStationDetail> busStationDetailList;
     private String busLineName;
     private String busType;
