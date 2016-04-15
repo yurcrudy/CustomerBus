@@ -22,4 +22,8 @@ public class ToastUtil {
         Toast.makeText(context, info, Toast.LENGTH_LONG).show();
     }
 
+    public static void ToastForShort(Context context, int info) {
+        Toast.makeText(context, info, Toast.LENGTH_SHORT).show();
+    }
+
 }

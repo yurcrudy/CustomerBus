@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surround_bus_background">
+    <RelativeLayout
+        style="@style/actionbar_default">
+        <ImageView
+            android:id="@+id/iv_back"
+            style="@style/actionbar_left"
+            android:src="@drawable/btn_actionbar_back"/>
+        <TextView
+            style="@style/actionbar_title"
+            android:text="@string/bus_transfer_query_title"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/default_padding"
+        android:padding="@dimen/default_padding"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

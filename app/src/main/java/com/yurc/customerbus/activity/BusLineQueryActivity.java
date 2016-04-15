@@ -14,6 +14,7 @@ import com.amap.api.services.busline.BusLineItem;
 import com.amap.api.services.busline.BusLineQuery;
 import com.amap.api.services.busline.BusLineResult;
 import com.amap.api.services.busline.BusLineSearch;
+import com.amap.api.services.busline.BusStationQuery;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.adapter.BusLineQueryAdapter;
 import com.yurc.customerbus.model.BusLineDetail;
@@ -109,13 +110,8 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
         busLineSearch.setOnBusLineSearchListener(this);// 设置查询结果的监听
         busLineSearch.searchBusLineAsyn();// 异步查询公交线路名称
         // 公交站点搜索事例
-		/*
-		 * BusStationQuery query = new BusStationQuery(search,cityCode);
-		 * query.setPageSize(10); query.setPageNumber(currentpage);
-		 * BusStationSearch busStationSearch = new BusStationSearch(this,query);
-		 * busStationSearch.setOnBusStationSearchListener(this);
-		 * busStationSearch.searchBusStationAsyn();
-		 */
+
+
     }
 
     @Override
@@ -142,15 +138,14 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
 //                    busLineOverlay.zoomToSpan();
                 }
             } else {
-
-                ToastUtil.ToastForLong(BusLineQueryActivity.this, R.string.no_result);
+                ToastUtil.ToastForShort(BusLineQueryActivity.this, R.string.no_result);
             }
         } else if (rCode == 27) {
-            ToastUtil.ToastForLong(BusLineQueryActivity.this, R.string.error_network);
+            ToastUtil.ToastForShort(BusLineQueryActivity.this, R.string.error_network);
         } else if (rCode == 32) {
-            ToastUtil.ToastForLong(BusLineQueryActivity.this, R.string.error_key);
+            ToastUtil.ToastForShort(BusLineQueryActivity.this, R.string.error_key);
         } else {
-            ToastUtil.ToastForLong(BusLineQueryActivity.this, R.string.error_other);
+            ToastUtil.ToastForShort(BusLineQueryActivity.this, R.string.error_other);
         }
         dismissDialog();
     }

@@ -16,6 +16,8 @@ import com.yurc.customerbus.R;
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private RelativeLayout rl_surround_bus;
     private RelativeLayout rl_line_bus;
+    private RelativeLayout rl_transfer_bus;
+    private RelativeLayout rl_station_bus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         rl_surround_bus.setOnClickListener(HomeActivity.this);
         rl_line_bus = (RelativeLayout)findViewById(R.id.rl_line_bus);
         rl_line_bus.setOnClickListener(HomeActivity.this);
+        rl_transfer_bus = (RelativeLayout)findViewById(R.id.rl_transfer_bus);
+        rl_transfer_bus.setOnClickListener(HomeActivity.this);
+        rl_station_bus = (RelativeLayout)findViewById(R.id.rl_station_bus);
+        rl_station_bus.setOnClickListener(HomeActivity.this);
     }
 
 
@@ -47,7 +53,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 intent = new Intent(HomeActivity.this,BusLineQueryActivity.class);
                 startActivity(intent);
                 break;
-
+            case R.id.rl_station_bus:
+                intent = new Intent(HomeActivity.this,BusStationQueryActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 }

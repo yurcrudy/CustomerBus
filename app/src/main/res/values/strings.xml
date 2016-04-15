@@ -27,4 +27,13 @@
     <string name="busline_query_title">线路查询</string>
     <string name="busline_query_et_hint">请输入线路名称</string>
     <string name="busline_query_del_hint">清空搜索历史记录</string>
+
+
+    <string name="bus_station_query_title">站点查询</string>
+    <string name="bus_station_query_et_hint">请输入线路名称</string>
+
+    <string name="bus_transfer_query_title">换乘查询</string>
+
+
+
 </resources>

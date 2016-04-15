@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.poisearch.PoiSearch;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.adapter.BusLineListAdapter;
 import com.yurc.customerbus.dao.BusLine;
@@ -62,5 +64,8 @@ public class SurroundBusActivity extends BaseActivity implements View.OnClickLis
                 finish();
                 break;
         }
+    }
+
+    public void searchBusLine(){
     }
 }

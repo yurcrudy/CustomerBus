@@ -78,6 +78,7 @@
         android:layout_weight="1"
         >
         <RelativeLayout
+            android:id="@+id/rl_station_bus"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -102,6 +103,7 @@
             android:layout_height="match_parent"
             android:background="@color/home_interval" />
         <RelativeLayout
+            android:id="@+id/rl_transfer_bus"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
