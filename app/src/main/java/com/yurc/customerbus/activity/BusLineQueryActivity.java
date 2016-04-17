@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.amap.api.maps.overlay.BusLineOverlay;
 import com.amap.api.services.busline.BusLineItem;
@@ -46,6 +47,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
     private BusLineResult busLineResult;// 公交线路搜索返回的结果
     private List<BusLineItem> lineItems = null;// 公交线路搜索返回的busline
     private static final String BUSLINE_DETAIL = "BUSLINE_DETAIL";
+    private TextView tv_title;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -68,7 +70,9 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
         iv_back.setOnClickListener(BusLineQueryActivity.this);
         iv_search = (ImageView)findViewById(R.id.iv_search);
         iv_search.setOnClickListener(BusLineQueryActivity.this);
-
+        tv_title = (TextView)findViewById(R.id.tv_title);
+        tv_title.setOnClickListener(BusLineQueryActivity.this);
+        tv_title.setFocusable(true);
     }
 
     @Override

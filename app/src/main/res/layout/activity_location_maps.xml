@@ -3,14 +3,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.amap.api.maps.MapView
-        android:id="@+id/mv_location"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        />
     <Button
         android:id="@+id/btn_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="test"/>
+    <com.amap.api.maps.MapView
+        android:id="@+id/mv_location"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        />
+
 </LinearLayout>

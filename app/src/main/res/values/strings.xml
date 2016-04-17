@@ -33,6 +33,11 @@
     <string name="bus_station_query_et_hint">请输入线路名称</string>
 
     <string name="bus_transfer_query_title">换乘查询</string>
+    <string name="start_location_hint">起始位置</string>
+    <string name="end_location_hint">终点位置</string>
+
+    <string name="search_location_title">位置搜索</string>
+    <string name="search_location_hint">输入要搜索位置的关键字</string>
 
 
 

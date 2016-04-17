@@ -57,6 +57,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 intent = new Intent(HomeActivity.this,BusStationQueryActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.rl_transfer_bus:
+                intent = new Intent(HomeActivity.this,BusTransferQueryActivity.class);
+                startActivity(intent);
+                break;
+
         }
     }
 }

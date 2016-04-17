@@ -12,6 +12,7 @@
             style="@style/actionbar_left"
             android:src="@drawable/btn_actionbar_back"/>
         <TextView
+            android:id="@+id/tv_title"
             style="@style/actionbar_title"
             android:text="@string/bus_line_detail_title"/>
     </RelativeLayout>

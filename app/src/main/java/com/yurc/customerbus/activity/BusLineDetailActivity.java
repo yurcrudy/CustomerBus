@@ -30,6 +30,7 @@ public class BusLineDetailActivity extends BaseActivity implements View.OnClickL
     private BusLineDetail busLineDetail = null;
     private ImageView iv_back;
     private static final String BUSLINE_DETAIL = "BUSLINE_DETAIL";
+    private TextView tv_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +44,15 @@ public class BusLineDetailActivity extends BaseActivity implements View.OnClickL
     }
 
     public void initViews(){
+        tv_title = (TextView)findViewById(R.id.tv_title);
+        tv_title.setOnClickListener(BusLineDetailActivity.this);
+        tv_title.setFocusable(true);
+        tv_title.setFocusableInTouchMode(true);
+        tv_title.requestFocus();
         busStationDetailList = new ArrayList<BusStationDetail>();
         busStationDetailList.addAll(busLineDetail.getBusStationDetailList());
         tv_bus_line_number = (TextView)findViewById(R.id.tv_bus_line_number);
-        tv_bus_line_number.setText(busLineDetail.getBusLineName().substring(0,busLineDetail.getBusLineName().indexOf("(")));
+        tv_bus_line_number.setText(busLineDetail.getBusLineName().substring(0, busLineDetail.getBusLineName().indexOf("(")));
         tv_bus_line_prace = (TextView)findViewById(R.id.tv_bus_line_prace);
         tv_bus_line_prace.setText(busLineDetail.getTotalPrice() + "元");
         tv_bus_line_time = (TextView)findViewById(R.id.tv_bus_line_time);
