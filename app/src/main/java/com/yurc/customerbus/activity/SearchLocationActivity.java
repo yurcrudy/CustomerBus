@@ -4,15 +4,18 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.Text;
@@ -40,7 +43,8 @@ import java.util.List;
  * Author：yurc
  * Describe：寻找位置页面
  */
-public class SearchLocationActivity extends BaseActivity implements View.OnClickListener,PoiSearch.OnPoiSearchListener{
+public class SearchLocationActivity extends BaseActivity implements View.OnClickListener,PoiSearch.OnPoiSearchListener,AMap.OnMarkerClickListener,
+        AMap.OnInfoWindowClickListener, AMap.OnMarkerDragListener, AMap.OnMapLoadedListener{
     private ImageView iv_search;
     private EditText et_location_name;
     private final double lt= 22.371533;
@@ -84,6 +88,10 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
         }
         //初始化定位层，并触发定位
         AMapMapsUtil.startLocation(aMap, locationMapsUtil);
+        aMap.setOnMarkerDragListener(this);// 设置marker可拖拽事件监听器
+        aMap.setOnMapLoadedListener(this);// 设置amap加载成功事件监听器
+        aMap.setOnMarkerClickListener(this);// 设置点击marker事件监听器
+        aMap.setOnInfoWindowClickListener(this);// 设置点击infoWindow事件监听器
     }
 
     @Override
@@ -138,8 +146,8 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
         showDialog("正在搜索");// 显示进度框
         currentPage = 0;
         cityCode = SharedPerferenceUtil.getString(SearchLocationActivity.this, DictionaryUtil.CITY_CODE, "440400");
-        query = new PoiSearch.Query(keyWord, "", cityCode);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
-        query.setPageSize(10);// 设置每页最多返回多少条poiitem
+        query = new PoiSearch.Query(keyWord, "公交车站", cityCode);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
+        query.setPageSize(15);// 设置每页最多返回多少条poiitem
         query.setPageNum(currentPage);// 设置查第一页
 
         poiSearch = new PoiSearch(this, query);
@@ -161,10 +169,7 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
                     LogUtil.v(JsonUtil.toJson(poiItems));
                     if (poiItems != null && poiItems.size() > 0) {
                         aMap.clear();// 清理之前的图标
-                        PoiOverlay poiOverlay = new PoiOverlay(aMap, poiItems);
-                        poiOverlay.removeFromMap();
-                        poiOverlay.addToMap();
-                        poiOverlay.zoomToSpan();
+                        addMarkersToMap(poiItems);
                     } else if (suggestionCities != null
                             && suggestionCities.size() > 0) {
 
@@ -191,9 +196,58 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
     public void onPoiItemSearched(PoiItem poiItem, int i) {
 
     }
+    /**
+     *  在地图上添加marker
+     * */
+    private void addMarkersToMap(List<PoiItem> poiItems){
+        View view = null;
+        if(poiItems != null && !poiItems.isEmpty()){
+            for(PoiItem item : poiItems){
+                view = LayoutInflater.from(SearchLocationActivity.this).inflate(R.layout.location_marker,null);
+                TextView tv_address = (TextView)view.findViewById(R.id.tv_address);
+                tv_address.setText(item.getTitle());
+                MarkerOptions markerOption = new MarkerOptions().anchor(0.5f, 0.5f)
+                        .position(new LatLng(item.getLatLonPoint().getLatitude(),item.getLatLonPoint().getLongitude()))
+                        .snippet(item.getTitle())
+                        .icon(BitmapDescriptorFactory.fromView(view))
+                        .draggable(true).period(50);
+                aMap.addMarker(markerOption);
+            }
+        }
+    }
 
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        ToastUtil.ToastForShort(SearchLocationActivity.this,marker.getSnippet() + "onInfoWindowClick");
+    }
 
-//
+    @Override
+    public void onMapLoaded() {
+
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        ToastUtil.ToastForShort(SearchLocationActivity.this,marker.getSnippet());
+        return false;
+    }
+
+    @Override
+    public void onMarkerDragStart(Marker marker) {
+
+    }
+
+    @Override
+    public void onMarkerDrag(Marker marker) {
+
+    }
+
+    @Override
+    public void onMarkerDragEnd(Marker marker) {
+
+    }
+
+    //
 //    /**
 //     * 在地图上添加marker
 //     */
