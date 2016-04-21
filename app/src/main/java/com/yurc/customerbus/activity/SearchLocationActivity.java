@@ -1,5 +1,6 @@
 package com.yurc.customerbus.activity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -135,6 +136,9 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
             case R.id.iv_back:
                 finish();
                 break;
+            case R.id.tv_address:
+
+                break;
         }
     }
 
@@ -205,14 +209,18 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
             for(PoiItem item : poiItems){
                 view = LayoutInflater.from(SearchLocationActivity.this).inflate(R.layout.location_marker,null);
                 TextView tv_address = (TextView)view.findViewById(R.id.tv_address);
+                tv_address.setOnClickListener(SearchLocationActivity.this);
                 tv_address.setText(item.getTitle());
                 MarkerOptions markerOption = new MarkerOptions().anchor(0.5f, 0.5f)
-                        .position(new LatLng(item.getLatLonPoint().getLatitude(),item.getLatLonPoint().getLongitude()))
-                        .snippet(item.getTitle())
+                        .title(item.getTitle())
+                        .position(new LatLng(item.getLatLonPoint().getLatitude(), item.getLatLonPoint().getLongitude()))
                         .icon(BitmapDescriptorFactory.fromView(view))
-                        .draggable(true).period(50);
+                        .draggable(false).period(50);
+
                 aMap.addMarker(markerOption);
             }
+        }else{
+            ToastUtil.ToastForShort(SearchLocationActivity.this,"未搜索到相关数据");
         }
     }
 
@@ -228,8 +236,11 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        ToastUtil.ToastForShort(SearchLocationActivity.this,marker.getSnippet());
-        return false;
+        Intent intent = new Intent();
+        intent.putExtra("LOCATION",marker.getTitle());
+        setResult(1,intent);
+        finish();
+        return true;
     }
 
     @Override

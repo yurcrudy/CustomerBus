@@ -21,6 +21,7 @@ import com.yurc.customerbus.adapter.BusLineQueryAdapter;
 import com.yurc.customerbus.model.BusLineDetail;
 import com.yurc.customerbus.util.DictionaryUtil;
 import com.yurc.customerbus.util.JsonUtil;
+import com.yurc.customerbus.util.LogUtil;
 import com.yurc.customerbus.util.SharedPerferenceUtil;
 import com.yurc.customerbus.util.ToastUtil;
 
@@ -129,6 +130,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
                             && result.getBusLines().size() > 0) {
                         busLineResult = result;
                         lineItems = result.getBusLines();
+                        LogUtil.v(JsonUtil.toJson(lineItems));
                         showResultList(lineItems);
                     }
                 } else if (result.getQuery().getCategory() == BusLineQuery.SearchType.BY_LINE_ID) {

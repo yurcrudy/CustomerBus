@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amap.api.services.route.RouteSearch;
 import com.yurc.customerbus.R;
 
 /**
@@ -17,11 +18,13 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
 
     public static final String START_LOCATION  = "START_LOCATION";
     public static final String ENDLOCATION  = "END_LOCATION";
-
+    private String startLocation = "";
+    private String endLocation;
     private TextView tv_start_location;
     private TextView tv_end_location;
     private ImageView iv_exchange;
     private ImageView iv_search;
+    private int busMode = RouteSearch.BusDefault;// 公交默认模式
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +57,47 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
                 break;
             case R.id.tv_start_location:
                 //TODO 跳至起始地址
+                intent = new Intent(BusTransferQueryActivity.this,SearchLocationActivity.class);
+                startActivityForResult(intent,1);
                 break;
             case R.id.tv_end_location:
                 //TODO 跳至终点地址
                 intent = new Intent(BusTransferQueryActivity.this,SearchLocationActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 2);
                 break;
             case R.id.iv_exchange:
+                String temp = startLocation;
+                startLocation = endLocation;
+                endLocation = temp;
+                initStartEndLocation();
                 break;
             case R.id.iv_search:
                 break;
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && data != null){
+            startLocation = data.getStringExtra("LOCATION");
+            if(startLocation == null){
+                startLocation = "";
+            }else{
+                tv_start_location.setText(startLocation);
+            }
+        }else if(requestCode == 2 && data != null){
+            endLocation = data.getStringExtra("LOCATION");
+            if(endLocation == null){
+                endLocation = "";
+            }else{
+                tv_end_location.setText(endLocation);
+            }
+        }
+    }
+    public void initStartEndLocation(){
+        tv_start_location.setText(startLocation);
+        tv_end_location.setText(endLocation);
+    }
+
 }
