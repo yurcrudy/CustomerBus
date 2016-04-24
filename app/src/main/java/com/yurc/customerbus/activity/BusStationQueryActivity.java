@@ -6,17 +6,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.amap.api.services.busline.BusLineItem;
-import com.amap.api.services.busline.BusLineQuery;
 import com.amap.api.services.busline.BusStationItem;
 import com.amap.api.services.busline.BusStationQuery;
 import com.amap.api.services.busline.BusStationResult;
 import com.amap.api.services.busline.BusStationSearch;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.adapter.BusStationQueryAdapter;
-import com.yurc.customerbus.model.BusLineDetail;
 import com.yurc.customerbus.model.BusStationDetail;
 import com.yurc.customerbus.util.DictionaryUtil;
 import com.yurc.customerbus.util.JsonUtil;
@@ -74,7 +70,7 @@ public class BusStationQueryActivity extends BaseActivity implements View.OnClic
                 finish();
                 break;
             case R.id.ll_del:
-                ToastUtil.ToastForShort(BusStationQueryActivity.this,"清空");
+                ToastUtil.showForShort(BusStationQueryActivity.this, "清空");
                 break;
             case R.id.iv_search:
                 searchStation();
@@ -112,14 +108,14 @@ public class BusStationQueryActivity extends BaseActivity implements View.OnClic
                     showResultList(busStationResult.getBusStations());
                 }
             } else {
-                ToastUtil.ToastForShort(BusStationQueryActivity.this, R.string.no_result);
+                ToastUtil.showForShort(BusStationQueryActivity.this, R.string.no_result);
             }
         } else if (code == 27) {
-            ToastUtil.ToastForShort(BusStationQueryActivity.this, R.string.error_network);
+            ToastUtil.showForShort(BusStationQueryActivity.this, R.string.error_network);
         } else if (code == 32) {
-            ToastUtil.ToastForShort(BusStationQueryActivity.this, R.string.error_key);
+            ToastUtil.showForShort(BusStationQueryActivity.this, R.string.error_key);
         } else {
-            ToastUtil.ToastForShort(BusStationQueryActivity.this, R.string.error_other);
+            ToastUtil.showForShort(BusStationQueryActivity.this, R.string.error_other);
         }
         dismissDialog();
     }

@@ -35,7 +35,7 @@ public class TestActivity extends BaseActivity implements LocationImpl{
 
     @AfterViews
     void init(){
-        ToastUtil.ToastForShort(TestActivity.this, "TestActivity.init + " + Thread.currentThread().getId());
+        ToastUtil.showForShort(TestActivity.this, "TestActivity.init + " + Thread.currentThread().getId());
         locationHandler = new LocationHandler(TestActivity.this,TestActivity.this);
         locationHandler.sendEmptyMessage(LocationHandler.START_FLAG);//启动定位
     }
@@ -48,21 +48,21 @@ public class TestActivity extends BaseActivity implements LocationImpl{
     //开始定位
     @Override
     public void startLocation() {
-        ToastUtil.ToastForShort(TestActivity.this, "startLocation");
+        ToastUtil.showForShort(TestActivity.this, "startLocation");
         showDialog("正在定位");
     }
 
     //停止
     @Override
     public void stopLocation() {
-        ToastUtil.ToastForShort(TestActivity.this, "stopLocation");
+        ToastUtil.showForShort(TestActivity.this, "stopLocation");
         dismissDialog();
     }
 
     //完成
     @Override
     public void finishLocation(AMapLocation amapLocation) {
-        ToastUtil.ToastForShort(TestActivity.this, "successLocation");
+        ToastUtil.showForShort(TestActivity.this, "successLocation");
         dismissDialog();
     }
 

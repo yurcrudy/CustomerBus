@@ -10,19 +10,19 @@ import android.widget.Toast;
  */
 public class ToastUtil {
 
-    public static void ToastForShort(Context context,String str){
+    public static void showForShort(Context context, String str){
         Toast.makeText(context,str,Toast.LENGTH_SHORT).show();
     }
 
-    public static void ToastForLong(Context context,String str){
+    public static void showForLong(Context context, String str){
         Toast.makeText(context,str,Toast.LENGTH_LONG).show();
     }
 
-    public static void ToastForLong(Context context, int info) {
+    public static void showForLong(Context context, int info) {
         Toast.makeText(context, info, Toast.LENGTH_LONG).show();
     }
 
-    public static void ToastForShort(Context context, int info) {
+    public static void showForShort(Context context, int info) {
         Toast.makeText(context, info, Toast.LENGTH_SHORT).show();
     }
 

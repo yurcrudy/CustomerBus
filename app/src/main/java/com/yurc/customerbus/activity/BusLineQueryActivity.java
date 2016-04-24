@@ -10,12 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.amap.api.maps.overlay.BusLineOverlay;
 import com.amap.api.services.busline.BusLineItem;
 import com.amap.api.services.busline.BusLineQuery;
 import com.amap.api.services.busline.BusLineResult;
 import com.amap.api.services.busline.BusLineSearch;
-import com.amap.api.services.busline.BusStationQuery;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.adapter.BusLineQueryAdapter;
 import com.yurc.customerbus.model.BusLineDetail;
@@ -83,7 +81,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.ll_del:
-                ToastUtil.ToastForLong(BusLineQueryActivity.this, "清空");
+                ToastUtil.showForLong(BusLineQueryActivity.this, "清空");
                 break;
             case R.id.iv_search:
                 searchLine();
@@ -144,14 +142,14 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
 //                    busLineOverlay.zoomToSpan();
                 }
             } else {
-                ToastUtil.ToastForShort(BusLineQueryActivity.this, R.string.no_result);
+                ToastUtil.showForShort(BusLineQueryActivity.this, R.string.no_result);
             }
         } else if (rCode == 27) {
-            ToastUtil.ToastForShort(BusLineQueryActivity.this, R.string.error_network);
+            ToastUtil.showForShort(BusLineQueryActivity.this, R.string.error_network);
         } else if (rCode == 32) {
-            ToastUtil.ToastForShort(BusLineQueryActivity.this, R.string.error_key);
+            ToastUtil.showForShort(BusLineQueryActivity.this, R.string.error_key);
         } else {
-            ToastUtil.ToastForShort(BusLineQueryActivity.this, R.string.error_other);
+            ToastUtil.showForShort(BusLineQueryActivity.this, R.string.error_other);
         }
         dismissDialog();
     }

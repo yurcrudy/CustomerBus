@@ -37,6 +37,7 @@ public class BusLineDetail implements Serializable{
                 this.busStationDetailList.add(new BusStationDetail(busStationItem));
             }
         }
+
         this.busLineName = busLineItem.getBusLineName();
         this.busType = busLineItem.getBusLineType();
         this.cityCode = busLineItem.getCityCode();

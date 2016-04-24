@@ -14,7 +14,7 @@ public class BusStationDetail implements Serializable{
     private String busStationName;
     private String cityCode;
     private String ADCode;
-
+    private Location location;
     public BusStationDetail() {
     }
 
@@ -23,6 +23,7 @@ public class BusStationDetail implements Serializable{
         this.busStationName = busStationItem.getBusStationName();
         this.cityCode = busStationItem.getCityCode();
         this.ADCode = busStationItem.getAdCode();
+        this.location = new Location(busStationItem.getLatLonPoint());
     }
 
 
@@ -64,5 +65,13 @@ public class BusStationDetail implements Serializable{
 
     public void setADCode(String ADCode) {
         this.ADCode = ADCode;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

@@ -1,32 +1,25 @@
 package com.yurc.customerbus.activity;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
-import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.maps.model.Text;
-import com.amap.api.maps.model.TextOptions;
-import com.amap.api.maps.overlay.PoiOverlay;
 import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.core.SuggestionCity;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.yurc.customerbus.R;
+import com.yurc.customerbus.model.Location;
 import com.yurc.customerbus.util.AMapMapsUtil;
 import com.yurc.customerbus.util.DictionaryUtil;
 import com.yurc.customerbus.util.JsonUtil;
@@ -36,7 +29,6 @@ import com.yurc.customerbus.util.SharedPerferenceUtil;
 import com.yurc.customerbus.util.StringUtil;
 import com.yurc.customerbus.util.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -178,20 +170,20 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
                             && suggestionCities.size() > 0) {
 
                     } else {
-                        ToastUtil.ToastForShort(SearchLocationActivity.this,R.string.no_result);
+                        ToastUtil.showForShort(SearchLocationActivity.this, R.string.no_result);
                     }
                 }
             } else {
-                ToastUtil.ToastForShort(SearchLocationActivity.this,
+                ToastUtil.showForShort(SearchLocationActivity.this,
                         R.string.no_result);
             }
         } else if (rCode == 27) {
-            ToastUtil.ToastForShort(SearchLocationActivity.this,
+            ToastUtil.showForShort(SearchLocationActivity.this,
                     R.string.error_network);
         } else if (rCode == 32) {
-            ToastUtil.ToastForShort(SearchLocationActivity.this, R.string.error_key);
+            ToastUtil.showForShort(SearchLocationActivity.this, R.string.error_key);
         } else {
-            ToastUtil.ToastForShort(SearchLocationActivity.this,
+            ToastUtil.showForShort(SearchLocationActivity.this,
                     getString(R.string.error_other) + rCode);
         }
     }
@@ -220,13 +212,13 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
                 aMap.addMarker(markerOption);
             }
         }else{
-            ToastUtil.ToastForShort(SearchLocationActivity.this,"未搜索到相关数据");
+            ToastUtil.showForShort(SearchLocationActivity.this, "未搜索到相关数据");
         }
     }
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        ToastUtil.ToastForShort(SearchLocationActivity.this,marker.getSnippet() + "onInfoWindowClick");
+        ToastUtil.showForShort(SearchLocationActivity.this, marker.getSnippet() + "onInfoWindowClick");
     }
 
     @Override
@@ -238,7 +230,8 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
     public boolean onMarkerClick(Marker marker) {
         Intent intent = new Intent();
         intent.putExtra("LOCATION",marker.getTitle());
-        setResult(1,intent);
+        intent.putExtra("LOCATION_DETAIL", new Location(marker.getPosition().longitude,marker.getPosition().latitude));
+        setResult(1, intent);
         finish();
         return true;
     }

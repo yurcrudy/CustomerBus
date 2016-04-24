@@ -345,14 +345,14 @@ public class BuslineActivity extends Activity implements OnMarkerClickListener,
 				busStationResult = result;
 				stationItems = result.getBusStations();
 			} else {
-				ToastUtil.ToastForLong(BuslineActivity.this, R.string.no_result);
+				ToastUtil.showForLong(BuslineActivity.this, R.string.no_result);
 			}
 		} else if (rCode == 27) {
-			ToastUtil.ToastForLong(BuslineActivity.this, R.string.error_network);
+			ToastUtil.showForLong(BuslineActivity.this, R.string.error_network);
 		} else if (rCode == 32) {
-			ToastUtil.ToastForLong(BuslineActivity.this, R.string.error_key);
+			ToastUtil.showForLong(BuslineActivity.this, R.string.error_key);
 		} else {
-			ToastUtil.ToastForLong(BuslineActivity.this, R.string.error_other);
+			ToastUtil.showForLong(BuslineActivity.this, R.string.error_other);
 		}
 	}
 
@@ -385,14 +385,14 @@ public class BuslineActivity extends Activity implements OnMarkerClickListener,
 				}
 			} else {
 				
-				ToastUtil.ToastForLong(BuslineActivity.this, R.string.no_result);
+				ToastUtil.showForLong(BuslineActivity.this, R.string.no_result);
 			}
 		} else if (rCode == 27) {
-			ToastUtil.ToastForLong(BuslineActivity.this, R.string.error_network);
+			ToastUtil.showForLong(BuslineActivity.this, R.string.error_network);
 		} else if (rCode == 32) {
-			ToastUtil.ToastForLong(BuslineActivity.this, R.string.error_key);
+			ToastUtil.showForLong(BuslineActivity.this, R.string.error_key);
 		} else {
-			ToastUtil.ToastForLong(BuslineActivity.this, R.string.error_other);
+			ToastUtil.showForLong(BuslineActivity.this, R.string.error_other);
 		}
 	}
 
