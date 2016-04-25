@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.amap.api.services.core.LatLonPoint;
@@ -13,10 +15,16 @@ import com.amap.api.services.route.DriveRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
 import com.yurc.customerbus.R;
+import com.yurc.customerbus.adapter.BusTransferAdapter;
+import com.yurc.customerbus.model.BusTransferDetail;
 import com.yurc.customerbus.model.Location;
 import com.yurc.customerbus.util.JsonUtil;
 import com.yurc.customerbus.util.LogUtil;
 import com.yurc.customerbus.util.ToastUtil;
+import com.yurc.customerbus.view.ListViewForScrollView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Date：4/15/2016
@@ -38,6 +46,13 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
     private LatLonPoint endPoint = null;
     private RouteSearch routeSearch;
     private BusRouteResult busRouteResult;
+    private BusTransferAdapter busTransferAdapter;
+    private List<BusTransferDetail> busTransferDetailList;
+    private LinearLayout ll_history;
+    private ScrollView sv_transfer;
+    private ListViewForScrollView lv_history;
+    private ListViewForScrollView lv_transfer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +69,11 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
         iv_exchange = (ImageView)findViewById(R.id.iv_exchange);
         iv_search = (ImageView)findViewById(R.id.iv_search);
 
+        ll_history = (LinearLayout)findViewById(R.id.ll_history);
+        sv_transfer = (ScrollView)findViewById(R.id.sv_transfer);
+        lv_history = (ListViewForScrollView)findViewById(R.id.lv_history);
+        lv_transfer = (ListViewForScrollView)findViewById(R.id.lv_transfer);
+
 
         tv_start_location.setOnClickListener(BusTransferQueryActivity.this);
         tv_end_location.setOnClickListener(BusTransferQueryActivity.this);
@@ -62,6 +82,10 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
 
         routeSearch = new RouteSearch(this);
         routeSearch.setRouteSearchListener(this);
+
+        busTransferDetailList = new ArrayList<BusTransferDetail>();
+        busTransferAdapter = new BusTransferAdapter(BusTransferQueryActivity.this,R.layout.list_item_bustransfer_detail,busTransferDetailList);
+        lv_transfer.setAdapter(busTransferAdapter);
     }
 
     @Override
@@ -134,7 +158,7 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
         showDialog("正在查询公交换乘方案...");
         final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(
                 startPoint, endPoint);
-        RouteSearch.BusRouteQuery query = new RouteSearch.BusRouteQuery(fromAndTo, busMode, "北京", 0);// 第一个参数表示路径规划的起点和终点，第二个参数表示公交查询模式，第三个参数表示公交查询城市区号，第四个参数表示是否计算夜班车，0表示不计算
+        RouteSearch.BusRouteQuery query = new RouteSearch.BusRouteQuery(fromAndTo, busMode, "珠海市", 0);// 第一个参数表示路径规划的起点和终点，第二个参数表示公交查询模式，第三个参数表示公交查询城市区号，第四个参数表示是否计算夜班车，0表示不计算
         routeSearch.calculateBusRouteAsyn(query);// 异步路径规划公交模式查询
     }
 
@@ -145,8 +169,12 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
             if (result != null && result.getPaths() != null
                     && result.getPaths().size() > 0) {
                 busRouteResult = result;
-                BusPath busPath = busRouteResult.getPaths().get(0);
-
+                busTransferDetailList.clear();
+                for(BusPath busPath : busRouteResult.getPaths()){
+                    busTransferDetailList.add(new BusTransferDetail(busPath));
+                }
+                busTransferAdapter.notifyDataSetChanged();
+                initTransferVisibility();
             } else {
                 ToastUtil.showForShort(BusTransferQueryActivity.this, R.string.no_result);
             }
@@ -169,5 +197,10 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
     @Override
     public void onWalkRouteSearched(WalkRouteResult walkRouteResult, int i) {
 
+    }
+
+    public void initTransferVisibility(){
+        ll_history.setVisibility(View.GONE);
+        sv_transfer.setVisibility(View.VISIBLE);
     }
 }

@@ -20,6 +20,8 @@ public class BusTransferDetail implements Serializable{
     private float walkDistance;//总步行的距离
     private boolean nightBus;//返回是否包含夜班车
     private List<BusTransferStep> busTransferStepList = new ArrayList<BusTransferStep>();//公交换乘阶段集合
+    private int transferNum = 0;//该方案换乘的次数
+    private int passStationNum = 0;//该方案经过公交站的数量
 
     public BusTransferDetail(BusPath busPath) {
         this.busDistance = busPath.getBusDistance();
@@ -29,7 +31,11 @@ public class BusTransferDetail implements Serializable{
         this.duration = busPath.getDuration();
         this.nightBus = busPath.isNightBus();
         for(BusStep busStep : busPath.getSteps()){
-
+            busTransferStepList.add(new BusTransferStep(busStep));
+            transferNum += busStep.getBusLines().size();
+        }
+        for(BusTransferStep busTransferStep : busTransferStepList){
+            passStationNum += busTransferStep.getPassStationNum();
         }
     }
 
@@ -83,5 +89,29 @@ public class BusTransferDetail implements Serializable{
 
     public void setBusTransferStepList(List<BusTransferStep> busTransferStepList) {
         this.busTransferStepList = busTransferStepList;
+    }
+
+    public float getDuration() {
+        return duration;
+    }
+
+    public void setDuration(float duration) {
+        this.duration = duration;
+    }
+
+    public int getTransferNum() {
+        return transferNum;
+    }
+
+    public void setTransferNum(int transferNum) {
+        this.transferNum = transferNum;
+    }
+
+    public int getPassStationNum() {
+        return passStationNum;
+    }
+
+    public void setPassStationNum(int passStationNum) {
+        this.passStationNum = passStationNum;
     }
 }

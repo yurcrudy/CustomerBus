@@ -75,6 +75,7 @@
             />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_padding"
@@ -110,4 +111,17 @@
                 android:textSize="@dimen/font_l"/>
         </LinearLayout>
     </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/sv_transfer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding"
+        android:visibility="gone">
+        <com.yurc.customerbus.view.ListViewForScrollView
+            android:id="@+id/lv_transfer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.yurc.customerbus.view.ListViewForScrollView>
+    </ScrollView>
 </LinearLayout>
