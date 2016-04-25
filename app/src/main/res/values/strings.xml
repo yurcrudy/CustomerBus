@@ -40,6 +40,12 @@
     <string name="search_location_title">位置搜索</string>
     <string name="search_location_hint">输入要搜索位置的关键字</string>
 
+    <string name="bus_transfer_detail_title">换乘详情</string>
+    <string name="bus_transfer_detail_hint">换乘方案</string>
+    <string name="bus_transfer_detail_hint_two">详细信息</string>
+
+
+
 
 
 </resources>

@@ -3,6 +3,7 @@ package com.yurc.customerbus.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -41,7 +42,7 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
     private TextView tv_end_location;
     private ImageView iv_exchange;
     private ImageView iv_search;
-    private int busMode = RouteSearch.BusDefault;// 公交默认模式
+    private int busMode = RouteSearch.BusDefault;//公交默认模式
     private LatLonPoint startPoint = null;
     private LatLonPoint endPoint = null;
     private RouteSearch routeSearch;
@@ -86,6 +87,14 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
         busTransferDetailList = new ArrayList<BusTransferDetail>();
         busTransferAdapter = new BusTransferAdapter(BusTransferQueryActivity.this,R.layout.list_item_bustransfer_detail,busTransferDetailList);
         lv_transfer.setAdapter(busTransferAdapter);
+        lv_transfer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(BusTransferQueryActivity.this,BusTransferDetailActivity.class);
+                intent.putExtra("BUS_TRANSFER_DETAIL",busTransferDetailList.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -158,7 +167,7 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
         showDialog("正在查询公交换乘方案...");
         final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(
                 startPoint, endPoint);
-        RouteSearch.BusRouteQuery query = new RouteSearch.BusRouteQuery(fromAndTo, busMode, "珠海市", 0);// 第一个参数表示路径规划的起点和终点，第二个参数表示公交查询模式，第三个参数表示公交查询城市区号，第四个参数表示是否计算夜班车，0表示不计算
+        RouteSearch.BusRouteQuery query = new RouteSearch.BusRouteQuery(fromAndTo, busMode, "440400", 0);// 第一个参数表示路径规划的起点和终点，第二个参数表示公交查询模式，第三个参数表示公交查询城市区号，第四个参数表示是否计算夜班车，0表示不计算
         routeSearch.calculateBusRouteAsyn(query);// 异步路径规划公交模式查询
     }
 

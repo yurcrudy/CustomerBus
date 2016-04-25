@@ -99,6 +99,11 @@
             android:name=".activity.SearchLocationActivity"
             android:label="SearchLocationActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BusTransferDetailActivity"
+            android:label="BusTransferDetailActivity"
+            android:screenOrientation="portrait" />
+
 
 
         <service android:name="com.amap.api.location.APSService" >

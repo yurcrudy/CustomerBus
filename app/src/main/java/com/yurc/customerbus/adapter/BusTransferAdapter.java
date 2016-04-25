@@ -92,12 +92,17 @@ public class BusTransferAdapter extends BaseAdapter{
         String detail = "";
         String walkdistance = String.valueOf(busTransferDetail.getWalkDistance() / 1000);
         if(walkdistance.length() > 3){
-            walkdistance.substring(0,4);
+            walkdistance = walkdistance.substring(0,4);
         }
+        String time = String.valueOf(busTransferDetail.getDuration() / 60);
+        if(time.indexOf(".") > 0){
+            time = time.substring(0,time.indexOf("."));
+        }
+
         detail += busTransferDetail.getTransferNum() + "次换乘,乘车" +
                 busTransferDetail.getPassStationNum() + "站,步行约" +
                 walkdistance + "公里,约" +
-                busTransferDetail.getDuration() * 10 / 600 + "分钟";
+                time + "分钟";
         holder.tv_detail.setText(detail);
         return view;
     }

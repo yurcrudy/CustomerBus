@@ -121,7 +121,10 @@
         <com.yurc.customerbus.view.ListViewForScrollView
             android:id="@+id/lv_transfer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/surround_bus_background"
+            android:dividerHeight="10dp"
+            android:divider="@color/surround_bus_background">
         </com.yurc.customerbus.view.ListViewForScrollView>
     </ScrollView>
 </LinearLayout>

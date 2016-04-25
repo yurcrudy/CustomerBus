@@ -34,6 +34,9 @@ public class BusTransferDetail implements Serializable{
             busTransferStepList.add(new BusTransferStep(busStep));
             transferNum += busStep.getBusLines().size();
         }
+        if(transferNum > 0){
+            transferNum--;
+        }
         for(BusTransferStep busTransferStep : busTransferStepList){
             passStationNum += busTransferStep.getPassStationNum();
         }
