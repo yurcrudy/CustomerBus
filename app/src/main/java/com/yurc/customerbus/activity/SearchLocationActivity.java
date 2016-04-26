@@ -29,6 +29,7 @@ import com.yurc.customerbus.util.SharedPerferenceUtil;
 import com.yurc.customerbus.util.StringUtil;
 import com.yurc.customerbus.util.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,7 +52,8 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
     private PoiSearch.Query query;// Poi查询条件类
     private PoiSearch poiSearch;// POI搜索
     private String keyWord = "";
-
+    private ImageView iv_back;
+    private ArrayList<MarkerOptions> markerOptionsList = new ArrayList<MarkerOptions>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,9 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
             aMap = AMapMapsUtil.initAMap(mapView);
             initLocation();
         }
+        iv_back = (ImageView)findViewById(R.id.iv_back);
+
+        iv_back.setOnClickListener(SearchLocationActivity.this);
         iv_search = (ImageView)findViewById(R.id.iv_search);
         iv_search.setOnClickListener(SearchLocationActivity.this);
         et_location_name = (EditText)findViewById(R.id.et_location_name);
@@ -85,6 +90,7 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
         aMap.setOnMapLoadedListener(this);// 设置amap加载成功事件监听器
         aMap.setOnMarkerClickListener(this);// 设置点击marker事件监听器
         aMap.setOnInfoWindowClickListener(this);// 设置点击infoWindow事件监听器
+
     }
 
     @Override
@@ -121,7 +127,6 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
                 if(!StringUtil.isBlank(keyWord)){
                     doSearchQuery();
                 }else{
-
                 }
 
                 break;
@@ -198,6 +203,7 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
     private void addMarkersToMap(List<PoiItem> poiItems){
         View view = null;
         if(poiItems != null && !poiItems.isEmpty()){
+            markerOptionsList.clear();
             for(PoiItem item : poiItems){
                 view = LayoutInflater.from(SearchLocationActivity.this).inflate(R.layout.location_marker,null);
                 TextView tv_address = (TextView)view.findViewById(R.id.tv_address);
@@ -208,9 +214,10 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
                         .position(new LatLng(item.getLatLonPoint().getLatitude(), item.getLatLonPoint().getLongitude()))
                         .icon(BitmapDescriptorFactory.fromView(view))
                         .draggable(false).period(50);
+                markerOptionsList.add(markerOption);
 
-                aMap.addMarker(markerOption);
             }
+            aMap.addMarkers(markerOptionsList,true);
         }else{
             ToastUtil.showForShort(SearchLocationActivity.this, "未搜索到相关数据");
         }

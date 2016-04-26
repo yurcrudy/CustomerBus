@@ -21,8 +21,12 @@ public class WalkItem implements Serializable{
     public WalkItem() {
     }
     public WalkItem(RouteBusWalkItem routeBusWalkItem) {
-        this.detination = new Location(routeBusWalkItem.getDestination());
-        this.origin = new Location(routeBusWalkItem.getOrigin());
+        if(routeBusWalkItem.getDestination() != null){
+            this.detination = new Location(routeBusWalkItem.getDestination());
+        }
+        if(routeBusWalkItem.getDestination() != null){
+            this.origin = new Location(routeBusWalkItem.getOrigin());
+        }
         this.duration = routeBusWalkItem.getDuration();
         for(WalkStep walkStep : routeBusWalkItem.getSteps()){
             walkItemStepList.add(new WalkItemStep(walkStep));
@@ -51,5 +55,13 @@ public class WalkItem implements Serializable{
 
     public void setWalkItemStepList(List<WalkItemStep> walkItemStepList) {
         this.walkItemStepList = walkItemStepList;
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
     }
 }

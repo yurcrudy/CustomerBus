@@ -81,4 +81,12 @@ public class BusTransferBusItem extends BusLineDetail implements Serializable{
     public void setPolyLine(List<Location> polyLine) {
         this.polyLine = polyLine;
     }
+
+    public List<BusStationDetail> getPassStationlist() {
+        return passStationlist;
+    }
+
+    public void setPassStationlist(List<BusStationDetail> passStationlist) {
+        this.passStationlist = passStationlist;
+    }
 }

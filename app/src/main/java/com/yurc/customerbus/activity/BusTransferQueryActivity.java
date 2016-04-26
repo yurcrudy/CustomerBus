@@ -53,6 +53,7 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
     private ScrollView sv_transfer;
     private ListViewForScrollView lv_history;
     private ListViewForScrollView lv_transfer;
+    private ImageView iv_back;
 
 
     @Override
@@ -75,6 +76,8 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
         lv_history = (ListViewForScrollView)findViewById(R.id.lv_history);
         lv_transfer = (ListViewForScrollView)findViewById(R.id.lv_transfer);
 
+        iv_back = (ImageView)findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(BusTransferQueryActivity.this);
 
         tv_start_location.setOnClickListener(BusTransferQueryActivity.this);
         tv_end_location.setOnClickListener(BusTransferQueryActivity.this);
@@ -92,6 +95,8 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(BusTransferQueryActivity.this,BusTransferDetailActivity.class);
                 intent.putExtra("BUS_TRANSFER_DETAIL",busTransferDetailList.get(position));
+                intent.putExtra("ORIGIN",tv_start_location.getText().toString());
+                intent.putExtra("END",tv_end_location.getText().toString());
                 startActivity(intent);
             }
         });
