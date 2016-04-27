@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.yurc.customerbus.R;
@@ -18,6 +19,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private RelativeLayout rl_line_bus;
     private RelativeLayout rl_transfer_bus;
     private RelativeLayout rl_station_bus;
+    private LinearLayout ll_city;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         rl_transfer_bus.setOnClickListener(HomeActivity.this);
         rl_station_bus = (RelativeLayout)findViewById(R.id.rl_station_bus);
         rl_station_bus.setOnClickListener(HomeActivity.this);
+        ll_city = (LinearLayout)findViewById(R.id.ll_city);
+        ll_city.setOnClickListener(HomeActivity.this);
+
     }
 
 
@@ -61,6 +67,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 intent = new Intent(HomeActivity.this,BusTransferQueryActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.ll_city:
+                intent = new Intent(HomeActivity.this,CityListActivity.class);
+                startActivity(intent);
+                break;
+
 
         }
     }

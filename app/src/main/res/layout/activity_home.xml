@@ -10,6 +10,19 @@
         <TextView
             style="@style/actionbar_title"
             android:text="@string/home_title"/>
+        <LinearLayout
+            android:id="@+id/ll_city"
+            style="@style/actionbar_right"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_city"
+                style="@style/actionbar_city_right"
+                android:text="珠海市"/>
+            <ImageView
+                style="@style/aspect_both_wrap"
+                android:src="@mipmap/bus_select"
+                />
+        </LinearLayout>
     </RelativeLayout>
     <ImageView
         android:layout_width="match_parent"
