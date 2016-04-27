@@ -117,8 +117,10 @@ public class SharedPerferenceUtil {
         return settings.getBoolean(key, defaultValue);
     }
 
+
+
     public static boolean remove(Context context,String key) {
-        return remove(context,PREFERENCE_NAME,key);
+        return remove(context, PREFERENCE_NAME, key);
     }
 
     public static boolean remove(Context context, String preferenceName,
@@ -129,4 +131,7 @@ public class SharedPerferenceUtil {
         editor.remove(key);
         return editor.commit();
     }
+
+
+
 }

@@ -146,8 +146,8 @@ public class SearchLocationActivity extends BaseActivity implements View.OnClick
     protected void doSearchQuery() {
         showDialog("正在搜索");// 显示进度框
         currentPage = 0;
-        cityCode = SharedPerferenceUtil.getString(SearchLocationActivity.this, DictionaryUtil.CITY_CODE, "440400");
-        query = new PoiSearch.Query(keyWord, "公交车站", cityCode);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
+        cityCode = SharedPerferenceUtil.getString(SearchLocationActivity.this, DictionaryUtil.CITY_CODE, "0756");
+        query = new PoiSearch.Query(keyWord, "地名地址信息", cityCode);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
         query.setPageSize(15);// 设置每页最多返回多少条poiitem
         query.setPageNum(currentPage);// 设置查第一页
 

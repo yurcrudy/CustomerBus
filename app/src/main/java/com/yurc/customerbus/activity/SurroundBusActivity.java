@@ -10,6 +10,8 @@ import com.amap.api.services.poisearch.PoiSearch;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.adapter.BusLineListAdapter;
 import com.yurc.customerbus.dao.BusLine;
+import com.yurc.customerbus.handler.LocationHandler;
+import com.yurc.customerbus.model.Location;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,8 @@ public class SurroundBusActivity extends BaseActivity implements View.OnClickLis
     private ListView lv_bus;
     private BusLineListAdapter busLineListAdapter;
     private ImageView iv_back;
-
+    //todo 完善定位功能
+    private LocationHandler locationHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,7 @@ public class SurroundBusActivity extends BaseActivity implements View.OnClickLis
         lv_bus.setAdapter(busLineListAdapter);
 
         iv_back = (ImageView)findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(SurroundBusActivity.this);
     }
 
     @Override

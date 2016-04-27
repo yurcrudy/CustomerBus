@@ -44,6 +44,9 @@
     <string name="bus_transfer_detail_hint">换乘方案</string>
     <string name="bus_transfer_detail_hint_two">详细信息</string>
 
+    <string name="city_list_title">城市列表</string>
+    <string name="city_list_location">当前选择的城市</string>
+
 
 
 

@@ -17,7 +17,7 @@
             <TextView
                 android:id="@+id/tv_city"
                 style="@style/actionbar_city_right"
-                android:text="珠海市"/>
+                android:text=""/>
             <ImageView
                 style="@style/aspect_both_wrap"
                 android:src="@mipmap/bus_select"

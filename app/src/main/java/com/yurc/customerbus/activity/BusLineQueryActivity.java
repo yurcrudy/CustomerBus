@@ -14,6 +14,8 @@ import com.amap.api.services.busline.BusLineItem;
 import com.amap.api.services.busline.BusLineQuery;
 import com.amap.api.services.busline.BusLineResult;
 import com.amap.api.services.busline.BusLineSearch;
+import com.amap.api.services.district.DistrictSearch;
+import com.amap.api.services.district.DistrictSearchQuery;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.adapter.BusLineQueryAdapter;
 import com.yurc.customerbus.model.BusLineDetail;
@@ -36,6 +38,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
     private BusLineQueryAdapter busLineQueryAdapter;
     private ListView lv_history;
     private LinearLayout ll_del;
+    private LinearLayout ll_city;
     private EditText et_busline_name;
     private ImageView iv_back;
     private ImageView iv_search;
@@ -47,6 +50,8 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
     private List<BusLineItem> lineItems = null;// 公交线路搜索返回的busline
     private static final String BUSLINE_DETAIL = "BUSLINE_DETAIL";
     private TextView tv_title;
+    private TextView tv_city;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -63,6 +68,9 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
         lv_history.setAdapter(busLineQueryAdapter);
         ll_del = (LinearLayout)findViewById(R.id.ll_del);
         ll_del.setOnClickListener(BusLineQueryActivity.this);
+        ll_city = (LinearLayout)findViewById(R.id.ll_city);
+        ll_city.setOnClickListener(BusLineQueryActivity.this);
+
         et_busline_name = (EditText)findViewById(R.id.et_busline_name);
         lv_history.setOnItemClickListener(BusLineQueryActivity.this);
         iv_back = (ImageView)findViewById(R.id.iv_back);
@@ -72,6 +80,8 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
         tv_title = (TextView)findViewById(R.id.tv_title);
         tv_title.setOnClickListener(BusLineQueryActivity.this);
         tv_title.setFocusable(true);
+        tv_city = (TextView)findViewById(R.id.tv_city);
+        tv_city.setText(SharedPerferenceUtil.getString(BusLineQueryActivity.this,DictionaryUtil.CITY_NAME,"珠海市"));
     }
 
     @Override
@@ -83,6 +93,11 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
             case R.id.ll_del:
                 ToastUtil.showForLong(BusLineQueryActivity.this, "清空");
                 break;
+            case R.id.ll_city:
+                Intent intent = new Intent(BusLineQueryActivity.this,CityListActivity.class);
+                startActivityForResult(intent, 1);
+                break;
+
             case R.id.iv_search:
                 searchLine();
                 break;
@@ -130,6 +145,8 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
                         lineItems = result.getBusLines();
                         LogUtil.v(JsonUtil.toJson(lineItems));
                         showResultList(lineItems);
+                    } else {
+                        ToastUtil.showForShort(BusLineQueryActivity.this, R.string.no_result);
                     }
                 } else if (result.getQuery().getCategory() == BusLineQuery.SearchType.BY_LINE_ID) {
 //                    aMap.clear();// 清理地图上的marker
@@ -140,9 +157,9 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
 //                    busLineOverlay.removeFromMap();
 //                    busLineOverlay.addToMap();
 //                    busLineOverlay.zoomToSpan();
+                }else{
+                    ToastUtil.showForShort(BusLineQueryActivity.this, R.string.no_result);
                 }
-            } else {
-                ToastUtil.showForShort(BusLineQueryActivity.this, R.string.no_result);
             }
         } else if (rCode == 27) {
             ToastUtil.showForShort(BusLineQueryActivity.this, R.string.error_network);
@@ -175,7 +192,15 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(BusLineQueryActivity.this,BusLineDetailActivity.class);
-        intent.putExtra("BUSLINE_DETAIL",busLineDetailList.get(position));
+        intent.putExtra("BUSLINE_DETAIL", busLineDetailList.get(position));
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1 && resultCode == DictionaryUtil.FINISH_CITY_LIST){
+            tv_city.setText(SharedPerferenceUtil.getString(BusLineQueryActivity.this,DictionaryUtil.CITY_NAME,"珠海市"));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

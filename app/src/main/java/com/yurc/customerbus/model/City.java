@@ -8,6 +8,15 @@ package com.yurc.customerbus.model;
 public class City {
     String name;
     String index;
+    String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getName() {
         return name;

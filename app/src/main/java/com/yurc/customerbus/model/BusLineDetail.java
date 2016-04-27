@@ -44,8 +44,12 @@ public class BusLineDetail implements Serializable{
         this.busLineID = busLineItem.getBusLineId();
         this.originStationName = busLineItem.getOriginatingStation();
         this.terminalStationName = busLineItem.getTerminalStation();
-        this.firstTime = busLineItem.getFirstBusTime().toString();
-        this.lastTime = busLineItem.getLastBusTime().toString();
+        if(busLineItem.getFirstBusTime() != null){
+            this.firstTime = busLineItem.getFirstBusTime().toString();
+        }
+         if(busLineItem.getLastBusTime() != null){
+            this.lastTime = busLineItem.getLastBusTime().toString();
+        }
         this.busCompanyName = busLineItem.getBusCompany();
         this.basePrice = busLineItem.getBasicPrice();
         this.totalPrice = busLineItem.getTotalPrice();
