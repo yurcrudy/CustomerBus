@@ -72,12 +72,15 @@ public class BusTransferDetailActivity extends BaseActivity implements View.OnCl
                     }
                 }
             }
-            for(BusTransferBusItem busTransferBusItem : busTransferStep.getBusTransferBusItems()){
-                busTransferDescriptionList.add(new BusTransferDescription(busTransferBusItem.getBusLineName(),
-                        "经过" + busTransferBusItem.getPassStaionNum() + "个站，" +
-                                busTransferBusItem.getPassStationlist().get(busTransferBusItem.getPassStationlist().size() - 1).getBusStationName() + "站下车",true));
-                busLines += busTransferBusItem.getBusLineName().substring(0,busTransferBusItem.getBusLineName().indexOf("(")) + "->";
+            if(busTransferStep.getBusTransferBusItems().size() > 0){
+                for(BusTransferBusItem busTransferBusItem : busTransferStep.getBusTransferBusItems()){
+                    busTransferDescriptionList.add(new BusTransferDescription(busTransferBusItem.getBusLineName(),
+                            "经过" + busTransferBusItem.getPassStaionNum() + "个站，" +
+                                    busTransferBusItem.getPassStationlist().get(busTransferBusItem.getPassStationlist().size() - 1).getBusStationName() + "站下车",true));
+                    busLines += busTransferBusItem.getBusLineName().substring(0,busTransferBusItem.getBusLineName().indexOf("(")) + "->";
+                }
             }
+
         }
 
         busLines = busLines.substring(0,busLines.length() - 2);

@@ -14,7 +14,6 @@ import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.adapter.BusSurroundAdapter;
-import com.yurc.customerbus.dao.BusLine;
 import com.yurc.customerbus.handler.LocationHandler;
 import com.yurc.customerbus.impl.LocationImpl;
 import com.yurc.customerbus.model.BusSurround;
@@ -43,7 +42,7 @@ public class SurroundBusActivity extends BaseActivity implements View.OnClickLis
     private AMapLocation location;
     private TextView tv_title;
     private int currentPage;
-    private String cityCode;
+    private String adCode;
     private PoiSearch.Query query;// Poi查询条件类
     private PoiSearch poiSearch;// POI搜索
     private PoiResult poiResult; // poi返回的结果
@@ -91,8 +90,12 @@ public class SurroundBusActivity extends BaseActivity implements View.OnClickLis
     protected void doSearchQuery() {
         showDialog("正在搜索");// 显示进度框
         currentPage = 0;
-        cityCode = SharedPerferenceUtil.getString(SurroundBusActivity.this, DictionaryUtil.CITY_CODE, "0756");
-        query = new PoiSearch.Query("公交站", "公交车站", cityCode);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
+        adCode = location.getAdCode();
+        if(adCode == null || adCode.equals("")){
+            locationHandler.sendEmptyMessage(LocationHandler.START_FLAG);
+            return;
+        }
+        query = new PoiSearch.Query("公交站", "公交车站", adCode);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
         query.setPageSize(15);// 设置每页最多返回多少条poiitem
         query.setPageNum(currentPage);// 设置查第一页
 

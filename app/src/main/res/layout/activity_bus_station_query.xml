@@ -13,6 +13,19 @@
         <TextView
             style="@style/actionbar_title"
             android:text="@string/bus_station_query_title"/>
+        <LinearLayout
+            android:id="@+id/ll_city"
+            style="@style/actionbar_right"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_city"
+                style="@style/actionbar_city_right"
+                android:text=""/>
+            <ImageView
+                style="@style/aspect_both_wrap"
+                android:src="@mipmap/bus_select"
+                />
+        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout

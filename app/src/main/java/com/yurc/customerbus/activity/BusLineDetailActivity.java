@@ -8,8 +8,13 @@ import android.widget.TextView;
 
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.adapter.BusLineDetailStationListAdapter;
+import com.yurc.customerbus.dao.BusLineDetailDB;
+import com.yurc.customerbus.dao.controller.BusLineDetailDBController;
 import com.yurc.customerbus.model.BusLineDetail;
 import com.yurc.customerbus.model.BusStationDetail;
+import com.yurc.customerbus.util.DictionaryUtil;
+import com.yurc.customerbus.util.JsonUtil;
+import com.yurc.customerbus.util.SharedPerferenceUtil;
 import com.yurc.customerbus.view.ListViewForScrollView;
 
 import java.util.ArrayList;
@@ -31,6 +36,7 @@ public class BusLineDetailActivity extends BaseActivity implements View.OnClickL
     private ImageView iv_back;
     private static final String BUSLINE_DETAIL = "BUSLINE_DETAIL";
     private TextView tv_title;
+    private BusLineDetailDBController busLineDetailDBController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +68,12 @@ public class BusLineDetailActivity extends BaseActivity implements View.OnClickL
         lv_bus_station.setAdapter(busLineDetailStationListAdapter);
         iv_back = (ImageView)findViewById(R.id.iv_back);
         iv_back.setOnClickListener(BusLineDetailActivity.this);
-
+        busLineDetailDBController = BusLineDetailDBController.getInstance(BusLineDetailActivity.this);
+        BusLineDetailDB busLineDetailDB = new BusLineDetailDB();
+        busLineDetailDB.setCity(SharedPerferenceUtil.getString(BusLineDetailActivity.this, DictionaryUtil.CITY_NAME,"珠海市"));
+        busLineDetailDB.setBusLineName(busLineDetail.getBusLineName());
+        busLineDetailDB.setBusLineDetail(JsonUtil.toJson(busLineDetail));
+        busLineDetailDBController.addBusLineDetailDB(busLineDetailDB);
     }
 
     @Override

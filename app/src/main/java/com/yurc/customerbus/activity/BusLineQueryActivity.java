@@ -18,6 +18,8 @@ import com.amap.api.services.district.DistrictSearch;
 import com.amap.api.services.district.DistrictSearchQuery;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.adapter.BusLineQueryAdapter;
+import com.yurc.customerbus.dao.BusLineDetailDB;
+import com.yurc.customerbus.dao.controller.BusLineDetailDBController;
 import com.yurc.customerbus.model.BusLineDetail;
 import com.yurc.customerbus.util.DictionaryUtil;
 import com.yurc.customerbus.util.JsonUtil;
@@ -51,7 +53,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
     private static final String BUSLINE_DETAIL = "BUSLINE_DETAIL";
     private TextView tv_title;
     private TextView tv_city;
-
+    private BusLineDetailDBController busLineDetailDBController;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -82,6 +84,9 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
         tv_title.setFocusable(true);
         tv_city = (TextView)findViewById(R.id.tv_city);
         tv_city.setText(SharedPerferenceUtil.getString(BusLineQueryActivity.this,DictionaryUtil.CITY_NAME,"珠海市"));
+
+        busLineDetailDBController = BusLineDetailDBController.getInstance(BusLineQueryActivity.this);
+        initHistory();
     }
 
     @Override
@@ -97,7 +102,6 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
                 Intent intent = new Intent(BusLineQueryActivity.this,CityListActivity.class);
                 startActivityForResult(intent, 1);
                 break;
-
             case R.id.iv_search:
                 searchLine();
                 break;
@@ -199,7 +203,20 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1 && resultCode == DictionaryUtil.FINISH_CITY_LIST){
             tv_city.setText(SharedPerferenceUtil.getString(BusLineQueryActivity.this,DictionaryUtil.CITY_NAME,"珠海市"));
+            initHistory();
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    public void initHistory(){
+        List<BusLineDetailDB> list = busLineDetailDBController.getLimitNameList(tv_city.getText().toString().trim());
+        busLineDetailList.clear();
+        if(list != null && list.size() > 0){
+            for(BusLineDetailDB busLineDetailDB : list){
+                busLineDetailList.add(JsonUtil.fromJson(busLineDetailDB.getBusLineDetail(), BusLineDetail.class));
+            }
+        }
+        busLineQueryAdapter.notifyDataSetChanged();
     }
 }

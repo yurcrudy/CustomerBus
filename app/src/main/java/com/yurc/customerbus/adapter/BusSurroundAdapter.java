@@ -8,9 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.yurc.customerbus.R;
-import com.yurc.customerbus.dao.BusLine;
 import com.yurc.customerbus.model.BusSurround;
-import com.yurc.customerbus.util.StringUtil;
 
 import java.util.List;
 

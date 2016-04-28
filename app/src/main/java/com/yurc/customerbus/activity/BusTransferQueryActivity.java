@@ -19,8 +19,10 @@ import com.yurc.customerbus.R;
 import com.yurc.customerbus.adapter.BusTransferAdapter;
 import com.yurc.customerbus.model.BusTransferDetail;
 import com.yurc.customerbus.model.Location;
+import com.yurc.customerbus.util.DictionaryUtil;
 import com.yurc.customerbus.util.JsonUtil;
 import com.yurc.customerbus.util.LogUtil;
+import com.yurc.customerbus.util.SharedPerferenceUtil;
 import com.yurc.customerbus.util.ToastUtil;
 import com.yurc.customerbus.view.ListViewForScrollView;
 
@@ -54,7 +56,8 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
     private ListViewForScrollView lv_history;
     private ListViewForScrollView lv_transfer;
     private ImageView iv_back;
-
+    private LinearLayout ll_city;
+    private TextView tv_city;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,8 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
 
         iv_exchange = (ImageView)findViewById(R.id.iv_exchange);
         iv_search = (ImageView)findViewById(R.id.iv_search);
+        ll_city = (LinearLayout)findViewById(R.id.ll_city);
+        tv_city = (TextView)findViewById(R.id.tv_city);
 
         ll_history = (LinearLayout)findViewById(R.id.ll_history);
         sv_transfer = (ScrollView)findViewById(R.id.sv_transfer);
@@ -80,6 +85,7 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
         iv_back.setOnClickListener(BusTransferQueryActivity.this);
 
         tv_start_location.setOnClickListener(BusTransferQueryActivity.this);
+        ll_city.setOnClickListener(BusTransferQueryActivity.this);
         tv_end_location.setOnClickListener(BusTransferQueryActivity.this);
         iv_exchange.setOnClickListener(BusTransferQueryActivity.this);
         iv_search.setOnClickListener(BusTransferQueryActivity.this);
@@ -93,13 +99,14 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
         lv_transfer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(BusTransferQueryActivity.this,BusTransferDetailActivity.class);
-                intent.putExtra("BUS_TRANSFER_DETAIL",busTransferDetailList.get(position));
-                intent.putExtra("ORIGIN",tv_start_location.getText().toString());
-                intent.putExtra("END",tv_end_location.getText().toString());
+                Intent intent = new Intent(BusTransferQueryActivity.this, BusTransferDetailActivity.class);
+                intent.putExtra("BUS_TRANSFER_DETAIL", busTransferDetailList.get(position));
+                intent.putExtra("ORIGIN", tv_start_location.getText().toString());
+                intent.putExtra("END", tv_end_location.getText().toString());
                 startActivity(intent);
             }
         });
+        tv_city.setText(SharedPerferenceUtil.getString(BusTransferQueryActivity.this, DictionaryUtil.CITY_NAME, "珠海市"));
     }
 
     @Override
@@ -109,6 +116,11 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
             case R.id.iv_back:
                 finish();
                 break;
+            case R.id.ll_city:
+                intent = new Intent(BusTransferQueryActivity.this,CityListActivity.class);
+                startActivityForResult(intent, 1);
+                break;
+
             case R.id.tv_start_location:
                 //TODO 跳至起始地址
                 intent = new Intent(BusTransferQueryActivity.this,SearchLocationActivity.class);
@@ -138,6 +150,10 @@ public class BusTransferQueryActivity extends BaseActivity implements View.OnCli
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && resultCode == DictionaryUtil.FINISH_CITY_LIST){
+            tv_city.setText(SharedPerferenceUtil.getString(BusTransferQueryActivity.this, DictionaryUtil.CITY_NAME, "珠海市"));
+            return;
+        }
         if(requestCode == 1 && data != null){
             startLocationName = data.getStringExtra("LOCATION");
             Location location = (Location)data.getSerializableExtra("LOCATION_DETAIL");

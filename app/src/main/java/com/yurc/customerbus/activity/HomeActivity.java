@@ -54,6 +54,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,L
         ll_city.setOnClickListener(HomeActivity.this);
         locationHandler = new LocationHandler(HomeActivity.this,HomeActivity.this);
         tv_city.setText(SharedPerferenceUtil.getString(HomeActivity.this,DictionaryUtil.CITY_NAME,"珠海市"));
+
 //        locationHandler.sendEmptyMessage(1);
     }
 
@@ -64,19 +65,19 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,L
         switch (v.getId()){
             case R.id.rl_surround_bus:
                 intent = new Intent(HomeActivity.this,SurroundBusActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,2);
                 break;
             case R.id.rl_line_bus:
                 intent = new Intent(HomeActivity.this,BusLineQueryActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,3);
                 break;
             case R.id.rl_station_bus:
                 intent = new Intent(HomeActivity.this,BusStationQueryActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,4);
                 break;
             case R.id.rl_transfer_bus:
                 intent = new Intent(HomeActivity.this,BusTransferQueryActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,5);
                 break;
             case R.id.ll_city:
                 intent = new Intent(HomeActivity.this,CityListActivity.class);
@@ -87,9 +88,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,L
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 1 && resultCode == DictionaryUtil.FINISH_CITY_LIST){
-            tv_city.setText(SharedPerferenceUtil.getString(HomeActivity.this,DictionaryUtil.CITY_NAME,"珠海市"));
-        }
+        tv_city.setText(SharedPerferenceUtil.getString(HomeActivity.this,DictionaryUtil.CITY_NAME,"珠海市"));
         super.onActivityResult(requestCode, resultCode, data);
     }
 

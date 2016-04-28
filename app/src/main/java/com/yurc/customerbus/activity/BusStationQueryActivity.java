@@ -1,11 +1,13 @@
 package com.yurc.customerbus.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.amap.api.services.busline.BusStationItem;
 import com.amap.api.services.busline.BusStationQuery;
@@ -40,6 +42,9 @@ public class BusStationQueryActivity extends BaseActivity implements View.OnClic
     private String search = "";
     private List<BusStationDetail> busStationDetailList;
     private BusStationQueryAdapter busStationQueryAdapter;
+    private LinearLayout ll_city;
+    private TextView tv_city;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +65,10 @@ public class BusStationQueryActivity extends BaseActivity implements View.OnClic
         lv_history.setAdapter(busStationQueryAdapter);
         ll_del = (LinearLayout)findViewById(R.id.ll_del);
         ll_del.setOnClickListener(BusStationQueryActivity.this);
+        tv_city = (TextView)findViewById(R.id.tv_city);
+        ll_city = (LinearLayout)findViewById(R.id.ll_city);
+        ll_city.setOnClickListener(BusStationQueryActivity.this);
+        tv_city.setText(SharedPerferenceUtil.getString(BusStationQueryActivity.this, DictionaryUtil.CITY_NAME, "珠海市"));
 
     }
 
@@ -74,6 +83,10 @@ public class BusStationQueryActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.iv_search:
                 searchStation();
+                break;
+            case R.id.ll_city:
+                Intent intent = new Intent(BusStationQueryActivity.this,CityListActivity.class);
+                startActivityForResult(intent, 1);
                 break;
         }
     }
@@ -129,5 +142,13 @@ public class BusStationQueryActivity extends BaseActivity implements View.OnClic
             }
             busStationQueryAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1 && resultCode == DictionaryUtil.FINISH_CITY_LIST){
+            tv_city.setText(SharedPerferenceUtil.getString(BusStationQueryActivity.this, DictionaryUtil.CITY_NAME, "珠海市"));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

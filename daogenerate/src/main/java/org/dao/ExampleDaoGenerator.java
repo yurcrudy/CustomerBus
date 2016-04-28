@@ -36,7 +36,8 @@ public class ExampleDaoGenerator {
 //        addShoppingCart(schema);//购物车表
 
 //        addAnswerRemind(schema);//答题提醒表
-        addBusLine(schema);//
+//        addBusLine(schema);
+        addBusLineDetailDB(schema);
         new DaoGenerator().generateAll(schema, "app/src/main/java");
     }
 
@@ -110,4 +111,17 @@ public class ExampleDaoGenerator {
 
     }
 
+    public static void addBusLineDetailDB(Schema schema){
+        Entity entity = schema.addEntity("BusLineDetailDB");
+        //设置主键为自增
+        entity.addIdProperty().primaryKey().autoincrement();
+        //类实体json
+        entity.addStringProperty("BusLineDetail");
+        //城市专属
+        entity.addStringProperty("City");
+        entity.addStringProperty("BusLineName").unique();
+
+
+
+    }
 }
