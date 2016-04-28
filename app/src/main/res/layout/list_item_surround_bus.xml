@@ -27,7 +27,7 @@
             android:padding="@dimen/default_padding"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/tv_line_name"
+                android:id="@+id/tv_station_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:gravity="center_vertical"
@@ -46,19 +46,14 @@
                 android:gravity="center">
                 <!-- 方向 -->
                 <TextView
-                    android:id="@+id/tv_direction"
+                    android:id="@+id/tv_pass_bus_line"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:textColor="@color/surround_bus_list_text"/>
-                <TextView
-                    android:id="@+id/tv_start_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/black"
-                    android:text="首：06:00"/>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,12 +70,6 @@
                     android:textColor="@color/surround_bus_list_text"
                     android:singleLine="true"
                     android:ellipsize="end"/>
-                <TextView
-                    android:id="@+id/tv_end_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/black"
-                    android:text="末：06:00"/>
             </LinearLayout>
 
         </LinearLayout>

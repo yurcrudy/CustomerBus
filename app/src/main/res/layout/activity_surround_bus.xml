@@ -10,11 +10,17 @@
             android:id="@+id/iv_back"
             style="@style/actionbar_left"
             android:src="@drawable/btn_actionbar_back"/>
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/actionbar_title"
-            android:text="@string/surround_bus_title"/>
-
+        <LinearLayout
+            android:layout_toRightOf="@id/iv_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/actionbar_title"
+                android:maxLength="25"
+                android:text="@string/surround_bus_title"/>
+        </LinearLayout>
 
     </RelativeLayout>
     <ListView

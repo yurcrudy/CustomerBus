@@ -14,9 +14,10 @@ public class Location implements Serializable{
     private double latitude;
 
     public Location(LatLonPoint latLonPoint) {
-        this.latitude = latLonPoint.getLatitude();
-        this.longitude = latLonPoint.getLongitude();
-
+        if(latLonPoint!=null){
+            this.latitude = latLonPoint.getLatitude();
+            this.longitude = latLonPoint.getLongitude();
+        }
     }
 
     public Location(double longitude, double latitude) {

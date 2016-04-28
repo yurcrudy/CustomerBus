@@ -120,8 +120,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
         }
         cityCode = SharedPerferenceUtil.getString(BusLineQueryActivity.this, DictionaryUtil.CITY_CODE,"440400");
 
-        busLineQuery = new BusLineQuery(search, BusLineQuery.SearchType.BY_LINE_NAME,
-                cityCode);// 第一个参数表示公交线路名，第二个参数表示公交线路查询，第三个参数表示所在城市名或者城市区号
+        busLineQuery = new BusLineQuery(search, BusLineQuery.SearchType.BY_LINE_NAME, cityCode);// 第一个参数表示公交线路名，第二个参数表示公交线路查询，第三个参数表示所在城市名或者城市区号
         busLineQuery.setPageSize(10);// 设置每页返回多少条数据
         busLineQuery.setPageNumber(currentpage);// 设置查询第几页，第一页从0开始算起
         busLineSearch = new BusLineSearch(this, busLineQuery);// 设置条件

@@ -47,10 +47,10 @@
     <style name="actionbar_title" parent="aspect_both_wrap">
         <item name="android:textSize">@dimen/font_xl</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:maxLength">10</item>
+        <item name="android:maxLength">15</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">none</item>
+        <item name="android:ellipsize">end</item>
     </style>
     <!-- 默认 home_grid_title 样式-->
     <style name="home_grid_title" parent="aspect_both_wrap">

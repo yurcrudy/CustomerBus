@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.dao.BusLine;
+import com.yurc.customerbus.model.BusSurround;
 import com.yurc.customerbus.util.StringUtil;
 
 import java.util.List;
@@ -18,13 +19,13 @@ import java.util.List;
  * Author：yurc
  * Describe：
  */
-public class BusLineListAdapter extends BaseAdapter {
-    private List<BusLine> list;
+public class BusSurroundAdapter extends BaseAdapter {
+    private List<BusSurround> list;
     private LayoutInflater inflater;
     private Context context;
     private int itemLayout;
 
-    public BusLineListAdapter(List<BusLine> list, Context context, int itemLayout) {
+    public BusSurroundAdapter(List<BusSurround> list, Context context, int itemLayout) {
         this.list = list;
         this.context = context;
         this.inflater = LayoutInflater.from(this.context);
@@ -32,10 +33,8 @@ public class BusLineListAdapter extends BaseAdapter {
     }
 
     static class ViewHolder{
-        TextView tv_line_name;
-        TextView tv_start_time;
-        TextView tv_end_time;
-        TextView tv_direction;
+        TextView tv_station_name;
+        TextView tv_pass_bus_line;
         TextView tv_distance;
     }
 
@@ -57,25 +56,21 @@ public class BusLineListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        BusLine bus = list.get(position);
+        BusSurround bus = list.get(position);
         ViewHolder holder = null;
         if(null == convertView){
             convertView = inflater.inflate(itemLayout,null);
             holder = new ViewHolder();
-            holder.tv_direction = (TextView)convertView.findViewById(R.id.tv_direction);
+            holder.tv_station_name = (TextView)convertView.findViewById(R.id.tv_station_name);
             holder.tv_distance = (TextView)convertView.findViewById(R.id.tv_distance);
-            holder.tv_end_time = (TextView)convertView.findViewById(R.id.tv_end_time);
-            holder.tv_start_time = (TextView)convertView.findViewById(R.id.tv_start_time);
-            holder.tv_line_name = (TextView)convertView.findViewById(R.id.tv_line_name);
+            holder.tv_pass_bus_line = (TextView)convertView.findViewById(R.id.tv_pass_bus_line);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
-        holder.tv_line_name.setText(bus.getLinename() + "路");
-        holder.tv_start_time.setText("首:" + bus.getStartTime());
-        holder.tv_end_time.setText("末:" + bus.getEndTime());
-        holder.tv_direction.setText("开往  " + bus.getDirectionStie() + "  方向");
-        holder.tv_distance.setText(bus.getDirectionStie() + " | 约" + bus.getDistance() + "米");
+        holder.tv_station_name.setText(bus.getBusStationDetail().getBusStationName());
+        holder.tv_pass_bus_line.setText(bus.getBusStationDetail().getSnippet());
+        holder.tv_distance.setText("距离约" + bus.getDistance()+ "米");
         return convertView;
     }
 }
