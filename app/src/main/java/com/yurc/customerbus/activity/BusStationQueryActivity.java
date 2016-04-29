@@ -3,6 +3,7 @@ package com.yurc.customerbus.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,6 +64,14 @@ public class BusStationQueryActivity extends BaseActivity implements View.OnClic
         et_bus_station_name = (EditText)findViewById(R.id.et_bus_station_name);
         lv_history = (ListView)findViewById(R.id.lv_history);
         lv_history.setAdapter(busStationQueryAdapter);
+        lv_history.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(BusStationQueryActivity.this,BusStationDetailActivity.class);
+                intent.putExtra("BUS_STATION_DETAIL",busStationDetailList.get(i));
+                startActivity(intent);
+            }
+        });
         ll_del = (LinearLayout)findViewById(R.id.ll_del);
         ll_del.setOnClickListener(BusStationQueryActivity.this);
         tv_city = (TextView)findViewById(R.id.tv_city);

@@ -13,17 +13,17 @@ import com.yurc.customerbus.model.BusLineDetail;
 import java.util.List;
 
 /**
- * Date：2016/4/12
+ * Date：4/29/2016
  * Author：yurc
- * Describe：查询公交线路适配器
+ * Describe：站点详情线路列表适配器
  */
-public class BusLineQueryAdapter extends BaseAdapter{
+public class BusStationLinesAdapter extends BaseAdapter {
     private List<BusLineDetail> list;
     private LayoutInflater inflater;
     private int itemLayout;
     private Context context;
 
-    public BusLineQueryAdapter(List<BusLineDetail> list, int itemLayout, Context context) {
+    public BusStationLinesAdapter(List<BusLineDetail> list, int itemLayout, Context context) {
         this.list = list;
         this.itemLayout = itemLayout;
         this.context = context;
@@ -67,6 +67,5 @@ public class BusLineQueryAdapter extends BaseAdapter{
         TextView tv_first_last_station;
         TextView tv_direction;
     }
-
 
 }

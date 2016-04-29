@@ -54,6 +54,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
     private TextView tv_title;
     private TextView tv_city;
     private BusLineDetailDBController busLineDetailDBController;
+    private List<BusLineDetailDB> busLineDetailDBList;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -84,7 +85,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
         tv_title.setFocusable(true);
         tv_city = (TextView)findViewById(R.id.tv_city);
         tv_city.setText(SharedPerferenceUtil.getString(BusLineQueryActivity.this,DictionaryUtil.CITY_NAME,"珠海市"));
-
+        busLineDetailDBList = new ArrayList<BusLineDetailDB>();
         busLineDetailDBController = BusLineDetailDBController.getInstance(BusLineQueryActivity.this);
         initHistory();
     }
@@ -96,7 +97,7 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.ll_del:
-                ToastUtil.showForLong(BusLineQueryActivity.this, "清空");
+                deleteHistory();
                 break;
             case R.id.ll_city:
                 Intent intent = new Intent(BusLineQueryActivity.this,CityListActivity.class);
@@ -131,8 +132,6 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
         busLineSearch.setOnBusLineSearchListener(this);// 设置查询结果的监听
         busLineSearch.searchBusLineAsyn();// 异步查询公交线路名称
         // 公交站点搜索事例
-
-
     }
 
     @Override
@@ -212,11 +211,25 @@ public class BusLineQueryActivity extends BaseActivity implements View.OnClickLi
     public void initHistory(){
         List<BusLineDetailDB> list = busLineDetailDBController.getLimitNameList(tv_city.getText().toString().trim());
         busLineDetailList.clear();
+        busLineDetailDBList.clear();
         if(list != null && list.size() > 0){
+            ll_del.setVisibility(View.VISIBLE);
             for(BusLineDetailDB busLineDetailDB : list){
+                busLineDetailDBList.add(busLineDetailDB);
                 busLineDetailList.add(JsonUtil.fromJson(busLineDetailDB.getBusLineDetail(), BusLineDetail.class));
             }
         }
         busLineQueryAdapter.notifyDataSetChanged();
+
+    }
+
+    public void deleteHistory(){
+        if(busLineDetailDBList.size() > 0 && busLineDetailList.size() == busLineDetailDBList.size()){
+            busLineDetailDBController.deleteList(busLineDetailDBList);
+            busLineDetailDBList.clear();
+            busLineDetailList.clear();
+            busLineQueryAdapter.notifyDataSetChanged();
+            ll_del.setVisibility(View.GONE);
+        }
     }
 }

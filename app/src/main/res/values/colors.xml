@@ -157,6 +157,7 @@
 
     <!-- APP 主题色-->
     <color name="theme_color">#1EBDA7</color>
+    <!--<color name="theme_color">#8b9f5e</color>-->
 
     <!-- home activity grid title color-->
     <color name="home_grid_title">#6C6C6C</color>

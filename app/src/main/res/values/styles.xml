@@ -74,11 +74,24 @@
         <item name="android:paddingRight">@dimen/default_padding</item>
         <item name="android:gravity">center</item>
     </style>
+    <style name="bus_station_detail_ll" parent="aspect_match_wrap">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingTop">@dimen/default_padding</item>
+        <item name="android:paddingBottom">@dimen/default_padding</item>
+        <item name="android:paddingRight">@dimen/default_padding</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 
     <style name="bus_line_detail_hint" parent="aspect_both_wrap">
         <item name="android:textSize">@dimen/font_xl</item>
         <item name="android:textColor">@color/bus_line_detail_text</item>
     </style>
+    <style name="bus_station_detail_hint" parent="aspect_both_wrap">
+        <item name="android:textSize">@dimen/font_xl</item>
+        <item name="android:textColor">@color/bus_line_detail_text</item>
+    </style>
+
 
     <style name="bus_line_detail_txt">
         <item name="android:layout_width">0dp</item>
@@ -89,6 +102,16 @@
         <item name="android:gravity">right</item>
         <item name="android:paddingLeft">@dimen/default_padding</item>
     </style>
+    <style name="bus_station_detail_txt">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">@dimen/font_xl</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">right</item>
+        <item name="android:paddingLeft">@dimen/default_padding</item>
+    </style>
+
 
     <style name="bus_line_detail_hint_two" parent="aspect_match_wrap">
         <item name="android:layout_width">wrap_content</item>
@@ -97,6 +120,14 @@
         <item name="android:paddingTop">@dimen/default_padding</item>
         <item name="android:paddingBottom">@dimen/default_padding</item>
     </style>
+    <style name="bus_station_detail_hint_two" parent="aspect_match_wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/bus_line_detail_text</item>
+        <item name="android:paddingTop">@dimen/default_padding</item>
+        <item name="android:paddingBottom">@dimen/default_padding</item>
+    </style>
+
 
     <style name="actionbar_right" parent="aspect_both_wrap">
         <item name="android:layout_alignParentRight">true</item>

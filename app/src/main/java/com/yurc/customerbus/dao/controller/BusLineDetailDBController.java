@@ -41,7 +41,12 @@ public class BusLineDetailDBController {
     public boolean addBusLineDetailDB(BusLineDetailDB busLineDetailDB){
         boolean flag = false;//用于判断是否添加成功
         try {
-            busLineDetailDBDao.insert(busLineDetailDB);
+            QueryBuilder<BusLineDetailDB> qb = busLineDetailDBDao.queryBuilder();
+            qb.where(BusLineDetailDBDao.Properties.City.like(busLineDetailDB.getCity()))
+                    .where(BusLineDetailDBDao.Properties.BusLineName.like(busLineDetailDB.getBusLineName()));
+            if(qb.list() == null || qb.list().size() == 0){
+                busLineDetailDBDao.insert(busLineDetailDB);
+            }
             flag = true;
         }catch (Exception e){
             e.printStackTrace();
@@ -91,6 +96,27 @@ public class BusLineDetailDBController {
         }
         return flag;
     }
+    /**
+     * 删除 单个答题提醒 根据AnswerRemind
+     * */
+    public boolean deleteList(List<BusLineDetailDB> busLineDetailDBs){
+        boolean flag = false;//用于判断是否删除成功
+        try {
+            if(busLineDetailDBs != null && busLineDetailDBs.size() > 0){
+                for(BusLineDetailDB busLineDetailDB : busLineDetailDBs){
+                    busLineDetailDBDao.delete(busLineDetailDB);
+                }
+            }
+
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+
+
 
     /**
      * 根据id判断是否存在

@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amap.api.services.busline.BusLineItem;
+import com.amap.api.services.busline.BusLineQuery;
+import com.amap.api.services.busline.BusLineResult;
+import com.amap.api.services.busline.BusLineSearch;
 import com.yurc.customerbus.R;
 import com.yurc.customerbus.adapter.BusLineDetailStationListAdapter;
 import com.yurc.customerbus.dao.BusLineDetailDB;
@@ -14,7 +18,9 @@ import com.yurc.customerbus.model.BusLineDetail;
 import com.yurc.customerbus.model.BusStationDetail;
 import com.yurc.customerbus.util.DictionaryUtil;
 import com.yurc.customerbus.util.JsonUtil;
+import com.yurc.customerbus.util.LogUtil;
 import com.yurc.customerbus.util.SharedPerferenceUtil;
+import com.yurc.customerbus.util.ToastUtil;
 import com.yurc.customerbus.view.ListViewForScrollView;
 
 import java.util.ArrayList;
@@ -34,7 +40,7 @@ public class BusLineDetailActivity extends BaseActivity implements View.OnClickL
     private BusLineDetailStationListAdapter busLineDetailStationListAdapter;
     private BusLineDetail busLineDetail = null;
     private ImageView iv_back;
-    private static final String BUSLINE_DETAIL = "BUSLINE_DETAIL";
+    public static final String BUSLINE_DETAIL = "BUSLINE_DETAIL";
     private TextView tv_title;
     private BusLineDetailDBController busLineDetailDBController;
     @Override
@@ -43,10 +49,7 @@ public class BusLineDetailActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_busline_detail);
         Intent intent = getIntent();
         busLineDetail = (BusLineDetail)intent.getSerializableExtra(BUSLINE_DETAIL);
-        if(busLineDetail !=  null){
-            initViews();
-        }
-
+        initViews();
     }
 
     public void initViews(){
@@ -56,18 +59,25 @@ public class BusLineDetailActivity extends BaseActivity implements View.OnClickL
         tv_title.setFocusableInTouchMode(true);
         tv_title.requestFocus();
         busStationDetailList = new ArrayList<BusStationDetail>();
-        busStationDetailList.addAll(busLineDetail.getBusStationDetailList());
-        tv_bus_line_number = (TextView)findViewById(R.id.tv_bus_line_number);
-        tv_bus_line_number.setText(busLineDetail.getBusLineName().substring(0, busLineDetail.getBusLineName().indexOf("(")));
-        tv_bus_line_prace = (TextView)findViewById(R.id.tv_bus_line_prace);
-        tv_bus_line_prace.setText(busLineDetail.getTotalPrice() + "元");
-        tv_bus_line_time = (TextView)findViewById(R.id.tv_bus_line_time);
-
         lv_bus_station = (ListViewForScrollView)findViewById(R.id.lv_bus_station);
         busLineDetailStationListAdapter = new BusLineDetailStationListAdapter(R.layout.list_item_bus_station,busStationDetailList,BusLineDetailActivity.this);
         lv_bus_station.setAdapter(busLineDetailStationListAdapter);
         iv_back = (ImageView)findViewById(R.id.iv_back);
         iv_back.setOnClickListener(BusLineDetailActivity.this);
+            busStationDetailList.addAll(busLineDetail.getBusStationDetailList());
+            busLineDetailStationListAdapter.notifyDataSetChanged();
+            tv_bus_line_number = (TextView)findViewById(R.id.tv_bus_line_number);
+            tv_bus_line_number.setText(busLineDetail.getBusLineName().substring(0, busLineDetail.getBusLineName().indexOf("(")));
+            tv_bus_line_prace = (TextView)findViewById(R.id.tv_bus_line_prace);
+            tv_bus_line_prace.setText(busLineDetail.getTotalPrice() + "元");
+            tv_bus_line_time = (TextView)findViewById(R.id.tv_bus_line_time);
+            if(busLineDetail.getFirstTime() != null && busLineDetail.getFirstTime()!=null){
+                tv_bus_line_time.setText(busLineDetail.getFirstTime() + "-" + busLineDetail.getLastTime());
+            }
+        addToDB();
+    }
+
+    public void addToDB(){
         busLineDetailDBController = BusLineDetailDBController.getInstance(BusLineDetailActivity.this);
         BusLineDetailDB busLineDetailDB = new BusLineDetailDB();
         busLineDetailDB.setCity(SharedPerferenceUtil.getString(BusLineDetailActivity.this, DictionaryUtil.CITY_NAME,"珠海市"));
@@ -84,4 +94,6 @@ public class BusLineDetailActivity extends BaseActivity implements View.OnClickL
                 break;
         }
     }
+
+
 }

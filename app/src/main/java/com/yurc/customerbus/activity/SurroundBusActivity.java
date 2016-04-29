@@ -7,6 +7,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
+import com.amap.api.services.busline.BusStationResult;
+import com.amap.api.services.busline.BusStationSearch;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.core.SuggestionCity;
@@ -32,12 +34,12 @@ import java.util.List;
  * Author：yurc
  * Describe：周边公交页面
  */
-public class SurroundBusActivity extends BaseActivity implements View.OnClickListener,LocationImpl,PoiSearch.OnPoiSearchListener {
+public class SurroundBusActivity extends BaseActivity implements View.OnClickListener,LocationImpl,PoiSearch.OnPoiSearchListener ,BusStationSearch.OnBusStationSearchListener{
 
     private ListView lv_bus;
     private BusSurroundAdapter busSurroundAdapter;
     private ImageView iv_back;
-    //todo 完善定位功能
+    //todo 完善站点查询功能
     private LocationHandler locationHandler;
     private AMapLocation location;
     private TextView tv_title;
@@ -98,11 +100,9 @@ public class SurroundBusActivity extends BaseActivity implements View.OnClickLis
         query = new PoiSearch.Query("公交站", "公交车站", adCode);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
         query.setPageSize(15);// 设置每页最多返回多少条poiitem
         query.setPageNum(currentPage);// 设置查第一页
-
         poiSearch = new PoiSearch(this, query);
         poiSearch.setOnPoiSearchListener(this);
         poiSearch.setBound(new PoiSearch.SearchBound(new LatLonPoint(location.getLatitude(),location.getLongitude()),2000));
-
         poiSearch.searchPOIAsyn();
     }
 
@@ -178,6 +178,11 @@ public class SurroundBusActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onPoiItemSearched(PoiItem poiItem, int i) {
+
+    }
+
+    @Override
+    public void onBusStationSearched(BusStationResult busStationResult, int i) {
 
     }
 }

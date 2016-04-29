@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surround_bus_background">
+    <RelativeLayout
+        style="@style/actionbar_default">
+        <ImageView
+            android:id="@+id/iv_back"
+            style="@style/actionbar_left"
+            android:src="@drawable/btn_actionbar_back"/>
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/actionbar_title"
+            android:text="@string/bus_station_detail_title"/>
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/default_padding"
+                android:paddingTop="@dimen/default_padding"
+                android:layout_marginTop="@dimen/default_padding"
+                android:background="@color/white"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:text="@string/bus_station_detail_hint"
+                    style="@style/bus_station_detail_hint_two"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/bus_line_detail_interval"/>
+
+                <LinearLayout
+                    style="@style/bus_station_detail_ll">
+                    <ImageView
+                        style="@style/aspect_both_wrap"
+                        android:src="@mipmap/bus_gray"
+                        android:layout_margin="@dimen/default_padding"
+                        />
+                    <TextView
+                        style="@style/bus_station_detail_hint"
+                        android:text="@string/bus_station_name_hint"
+                        />
+                    <TextView
+                        android:id="@+id/tv_bus_station_name"
+                        style="@style/bus_station_detail_txt"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.yurc.customerbus.view.ListViewForScrollView
+                android:id="@+id/lv_bus_line"
+                android:layout_marginBottom="@dimen/default_padding"
+                android:layout_marginTop="@dimen/default_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

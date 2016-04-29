@@ -47,6 +47,10 @@
     <string name="city_list_title">城市列表</string>
     <string name="city_list_location">当前选择的城市</string>
 
+    <string name="bus_station_detail_title">站点详情</string>
+    <string name="bus_station_name_hint">站点名称</string>
+    <string name="bus_station_detail_hint">站点详情</string>
+
 
 
 

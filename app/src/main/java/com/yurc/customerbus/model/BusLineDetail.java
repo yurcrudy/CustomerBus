@@ -2,6 +2,7 @@ package com.yurc.customerbus.model;
 
 import com.amap.api.services.busline.BusLineItem;
 import com.amap.api.services.busline.BusStationItem;
+import com.yurc.customerbus.util.TimeUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -45,10 +46,10 @@ public class BusLineDetail implements Serializable{
         this.originStationName = busLineItem.getOriginatingStation();
         this.terminalStationName = busLineItem.getTerminalStation();
         if(busLineItem.getFirstBusTime() != null){
-            this.firstTime = busLineItem.getFirstBusTime().toString();
+            this.firstTime = TimeUtil.dateToString(busLineItem.getFirstBusTime(),TimeUtil.HOUR_MINUTE);
         }
          if(busLineItem.getLastBusTime() != null){
-            this.lastTime = busLineItem.getLastBusTime().toString();
+            this.lastTime = TimeUtil.dateToString(busLineItem.getLastBusTime(),TimeUtil.HOUR_MINUTE);
         }
         this.busCompanyName = busLineItem.getBusCompany();
         this.basePrice = busLineItem.getBasicPrice();
